@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, FileCheck, Clock, Star } from "lucide-react";
 import heroBackground from "@/assets/LandlordHero.jpg";
+import expertise2021 from "@/assets/Expertise2021.png";
+import phlAward from "@/assets/LegalAbility.png";
+import avoRatingBadge from "@/assets/Avo Rating.png";
 
 const HeroSection = () => {
   return (
@@ -79,16 +82,43 @@ const HeroSection = () => {
             <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
           </Button>
         </div>
-
-        {/* Social Proof */}
-        <div className="pt-8 border-t border-white/10">
-          <p className="text-xs text-white/60 mb-3">As featured in:</p>
-          <div className="flex items-center gap-6 opacity-70">
-            <div className="h-6 w-16 bg-white/20 rounded"></div>
-            <div className="h-6 w-16 bg-white/20 rounded"></div>
-            <div className="h-6 w-16 bg-white/20 rounded"></div>
+  {/* Social Proof - Awards */}
+      <div className="pt-8 border-t border-white/10">
+        <p className="text-xs text-white/60 mb-4">Award-Winning Legal Excellence</p>
+        <div className="flex items-center gap-6 opacity-90">
+          {/* Expertise 2021 Award */}
+          <div className="h-12 w-auto">
+            <img 
+              src={expertise2021} 
+              alt="Expertise 2021 Award"
+              className="h-full rounded-full w-auto object-contain"
+            />
           </div>
+          
+          {/* PHL Award */}
+          <div className="h-12 w-auto">
+            <img 
+              src={phlAward} 
+              alt="PHL Award"
+              className="h-full w-auto object-contain rounded-full"
+            />
+          </div>
+          
+          {/* AVVO Rating Badge - Clickable */}
+          <a 
+            href="https://www.avvo.com/attorneys/32217-fl-paola-parra-528267.html" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="h-12 w-auto transition-transform duration-300 hover:scale-110 hover:opacity-100"
+          >
+            <img 
+              src={avoRatingBadge} 
+              alt="AVVO Rating Badge"
+              className="h-full w-auto rounded-full object-contain"
+            />
+          </a>
         </div>
+      </div>
       </div>
 
       {/* Scroll Indicator */}
@@ -99,7 +129,7 @@ const HeroSection = () => {
       </div>
 
       {/* Floating Action Card */}
-      <div className="absolute right-12 top-1/2 transform -translate-y-1/2 hidden xl:block">
+      <div className="absolute right-12 top-1/7 transform -translate-y-1/2 hidden xl:block">
         <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 max-w-xs transform hover:scale-105 transition-all duration-300">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
