@@ -2,11 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Church Design System - Warm, welcoming colors inspired by spiritual themes */
-
 @layer base {
   :root {
-    /* Core Church Colors */
     --background: 0 0% 100%;
     --foreground: 220 26% 14%;
 
@@ -41,7 +38,7 @@
     --input: 220 13% 91%;
     --ring: 220 47% 17%;
 
-    /* Custom Church Colors */
+    /* Custom Website Colors */
     --church-navy: 220 47% 17%;
     --church-gold: 45 84% 47%;
     --church-light-blue: 200 50% 88%;
@@ -108,7 +105,7 @@
     --input: 220 26% 20%;
     --ring: 45 84% 47%;
 
-    /* Dark mode church colors */
+    /* Dark mode colors */
     --church-navy: 220 47% 12%;
     --church-gold: 45 84% 47%;
     --church-light-blue: 200 50% 25%;
@@ -187,5 +184,10 @@
   
   .slide-up.animate {
     @apply translate-y-0 opacity-100;
+  }
+}
+@layer utilities {
+  .header-transition {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }

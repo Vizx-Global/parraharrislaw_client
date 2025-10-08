@@ -49,7 +49,7 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Church Theme Colors
+        // Theme Colors
         "church-navy": "hsl(var(--church-navy))",
         "church-gold": "hsl(var(--church-gold))",
         "church-light-blue": "hsl(var(--church-light-blue))",

@@ -1,10 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/Parra_Harris-Final.png"; 
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const heroSection = document.getElementById('home');
+      if (heroSection) {
+        const heroHeight = heroSection.offsetHeight;
+        setIsScrolled(window.scrollY > heroHeight - 100);
+      } else {
+        setIsScrolled(window.scrollY > window.innerHeight - 100);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navItems = [
     { label: "Home", href: "#home" },
@@ -16,7 +32,11 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 w-full bg-transparent backdrop-blur-sm z-50 transition-all duration-300">
+    <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+      isScrolled 
+        ? 'bg-church-navy shadow-lg' 
+        : 'bg-transparent backdrop-blur-sm'
+    }`}>
       <div className="container mx-auto px-6 lg:px-12">
         <div className="flex justify-between items-center h-20">
           {/* Logo & Brand */}
@@ -24,11 +44,13 @@ const Header = () => {
             <img
               src={logo}
               alt="Parra Harris Law"
-              className="h-24 w-24 object-contain transition-transform group-hover:scale-110"
+              className="h-32 w-32 object-contain transition-transform group-hover:scale-110"
             />
-            <span className="text-xl font-bold text-white tracking-tight drop-shadow-lg">
-              Parra Harri&apos;s Law
-            </span>
+            {/* <span className={`text-xl font-bold tracking-tight transition-colors duration-500 ${
+              isScrolled ? 'text-white' : 'text-white drop-shadow-lg'
+            }`}>
+              Parra Harris Law
+            </span> */}
           </a>
 
           {/* Desktop Navigation */}
@@ -37,7 +59,11 @@ const Header = () => {
               <a
                 key={item.label}
                 href={item.href}
-                className="text-white/90 hover:text-secondary transition-all duration-300 text-sm font-medium tracking-wide relative py-2 after:absolute after:left-0 after:bottom-0 after:h-[1px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full"
+                className={`transition-all duration-300 text-sm font-medium tracking-wide relative py-2 after:absolute after:left-0 after:bottom-0 after:h-[1px] after:w-0 after:transition-all after:duration-300 hover:after:w-full ${
+                  isScrolled 
+                    ? 'text-white/90 hover:text-white after:bg-white' 
+                    : 'text-white/90 hover:text-secondary after:bg-white'
+                }`}
               >
                 {item.label}
               </a>
@@ -46,17 +72,25 @@ const Header = () => {
 
           {/* Desktop CTA Button */}
           <div className="hidden lg:block">
-           <Button
-            asChild
-            className="bg-secondary hover:bg-secondary/70 text-white border border-white/30 backdrop-blur-sm font-medium px-6 py-2 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            <Button
+              asChild
+              className={`font-medium px-6 py-2 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg ${
+                isScrolled
+                  ? 'bg-secondary hover:bg-secondary/90 text-white border border-secondary'
+                  : 'bg-secondary hover:bg-secondary/70 text-white border border-white/30 backdrop-blur-sm'
+              }`}
             >
-            <a href="#donate">Get Started</a>
-           </Button>
+              <a href="#donate">Get Started</a>
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 text-white hover:bg-white/10 rounded-lg transition-colors backdrop-blur-sm"
+            className={`lg:hidden p-2 rounded-lg transition-colors backdrop-blur-sm ${
+              isScrolled 
+                ? 'text-white hover:bg-white/10' 
+                : 'text-white hover:bg-white/10'
+            }`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -71,7 +105,11 @@ const Header = () => {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="lg:hidden animate-slide-down">
-            <div className="py-6 space-y-1 border-t border-white/20 bg-black/80 backdrop-blur-xl rounded-b-2xl">
+            <div className={`py-6 space-y-1 border-t rounded-b-2xl ${
+              isScrolled
+                ? 'bg-church-navy border-white/20'
+                : 'bg-black/80 backdrop-blur-xl border-white/20'
+            }`}>
               {navItems.map((item) => (
                 <a
                   key={item.label}
@@ -84,7 +122,11 @@ const Header = () => {
               ))}
               <div className="px-4 pt-4">
                 <Button
-                  className="bg-white/20 hover:bg-white/30 text-white border border-white/30 backdrop-blur-sm w-full font-medium py-3 rounded-full transition-all duration-300"
+                  className={`w-full font-medium py-3 rounded-full transition-all duration-300 ${
+                    isScrolled
+                      ? 'bg-secondary hover:bg-secondary/90 text-white'
+                      : 'bg-white/20 hover:bg-white/30 text-white border border-white/30 backdrop-blur-sm'
+                  }`}
                 >
                   Contact Us
                 </Button>
