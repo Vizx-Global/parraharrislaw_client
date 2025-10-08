@@ -1,0 +1,191 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Church Design System - Warm, welcoming colors inspired by spiritual themes */
+
+@layer base {
+  :root {
+    /* Core Church Colors */
+    --background: 0 0% 100%;
+    --foreground: 220 26% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 26% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 26% 14%;
+
+    /* Primary - Deep Navy Blue */
+    --primary: 220 47% 17%;
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 220 47% 25%;
+
+    /* Secondary - Warm Gold */
+    --secondary: 45 84% 47%;
+    --secondary-foreground: 220 26% 14%;
+    --secondary-light: 45 84% 65%;
+
+    /* Muted - Soft Gray */
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    /* Accent - Light Blue */
+    --accent: 200 50% 88%;
+    --accent-foreground: 220 26% 14%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 220 47% 17%;
+
+    /* Custom Church Colors */
+    --church-navy: 220 47% 17%;
+    --church-gold: 45 84% 47%;
+    --church-light-blue: 200 50% 88%;
+    --church-cream: 45 33% 96%;
+    --church-sage: 120 25% 85%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--church-navy)), hsl(var(--primary-glow)));
+    --gradient-divine: linear-gradient(180deg, hsl(var(--church-light-blue)), hsl(var(--accent)));
+    --gradient-warm: linear-gradient(45deg, hsl(var(--church-gold)), hsl(var(--secondary-light)));
+
+    /* Shadows */
+    --shadow-divine: 0 10px 40px -10px hsl(var(--church-navy) / 0.2);
+    --shadow-golden: 0 8px 32px -8px hsl(var(--church-gold) / 0.3);
+    --shadow-soft: 0 4px 20px -4px hsl(var(--church-navy) / 0.1);
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 47% 8%;
+    --foreground: 0 0% 98%;
+
+    --card: 220 47% 10%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 47% 10%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 45 84% 47%;
+    --primary-foreground: 220 47% 8%;
+    --primary-glow: 45 84% 55%;
+
+    --secondary: 220 26% 20%;
+    --secondary-foreground: 0 0% 98%;
+    --secondary-light: 220 26% 25%;
+
+    --muted: 220 26% 15%;
+    --muted-foreground: 220 9% 70%;
+
+    --accent: 200 50% 25%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 26% 20%;
+    --input: 220 26% 20%;
+    --ring: 45 84% 47%;
+
+    /* Dark mode church colors */
+    --church-navy: 220 47% 12%;
+    --church-gold: 45 84% 47%;
+    --church-light-blue: 200 50% 25%;
+    --church-cream: 45 20% 15%;
+    --church-sage: 120 25% 20%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(var(--church-navy)), hsl(var(--primary-glow)));
+    --gradient-divine: linear-gradient(180deg, hsl(var(--church-light-blue)), hsl(var(--accent)));
+    --gradient-warm: linear-gradient(45deg, hsl(var(--church-gold)), hsl(var(--secondary-light)));
+
+    --shadow-divine: 0 10px 40px -10px hsl(var(--church-gold) / 0.3);
+    --shadow-golden: 0 8px 32px -8px hsl(var(--church-gold) / 0.4);
+    --shadow-soft: 0 4px 20px -4px hsl(var(--foreground) / 0.1);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Hero Section Styles */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  .divine-gradient {
+    background: var(--gradient-divine);
+  }
+  
+  .warm-gradient {
+    background: var(--gradient-warm);
+  }
+
+  /* Text Styles */
+  .text-shadow-soft {
+    text-shadow: 0 2px 8px hsl(var(--church-navy) / 0.2);
+  }
+
+  /* Interactive Elements */
+  .church-button {
+    @apply bg-gradient-to-r from-church-gold to-secondary-light text-church-navy font-semibold py-3 px-8 rounded-lg shadow-golden transition-all duration-300 hover:scale-105 hover:shadow-lg;
+  }
+
+  .church-button-outline {
+    @apply border-2 border-church-gold text-church-gold bg-transparent font-semibold py-3 px-8 rounded-lg transition-all duration-300 hover:bg-church-gold hover:text-church-navy hover:shadow-golden;
+  }
+
+  /* Card Styles */
+  .church-card {
+    @apply bg-card border border-border rounded-xl p-6 shadow-soft hover:shadow-divine transition-all duration-300;
+  }
+
+  /* Animation Classes */
+  .slide-up {
+    @apply transform translate-y-4 opacity-0 transition-all duration-700 ease-out;
+  }
+  
+  .slide-up.animate {
+    @apply translate-y-0 opacity-100;
+  }
+}
