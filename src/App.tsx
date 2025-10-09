@@ -6,7 +6,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound"; 
 import ScrollToTopButton from "@/components/ScrollToTopButton";
-import ChatBubble from "@/components/ChatBubble"; // Import the ChatBubble
+import ChatBubble from "@/components/ChatBubble"; 
+import SignUpForm from "@/pages/Authentication/Registration";
+import SignIn from "@/pages/Authentication/Login";
+import DIY from "@/pages/Questionnaires/DIY";
+
 
 const queryClient = new QueryClient();
 
@@ -18,6 +22,9 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/sign-up" element={<SignUpForm />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/diy-plan" element={<DIY />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

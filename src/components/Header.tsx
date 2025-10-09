@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import logo from "@/assets/Parra_Harris-Final.png"; 
+import { Menu, X, Phone } from "lucide-react";
+import logo from "@/assets/Parra_Harris-Final.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,90 +10,137 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const heroSection = document.getElementById('home');
-      if (heroSection) {
-        const heroHeight = heroSection.offsetHeight;
-        setIsScrolled(window.scrollY > heroHeight - 100);
-      } else {
-        setIsScrolled(window.scrollY > window.innerHeight - 100);
+      const scrolled = window.scrollY > 100;
+      setIsScrolled(scrolled);
+    };
+
+    // Throttle scroll events for better performance
+    let ticking = false;
+    const throttledScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', throttledScroll, { passive: true });
+    return () => window.removeEventListener('scroll', throttledScroll);
   }, []);
 
   const navItems = [
-    { label: "Home", href: "#home" },
+    { label: "Home", href: "/" },
     { label: "Practice Areas", href: "#practice-areas" },
-    { label: "Attorneys", href: "#attorney" },
+    { label: "Attorneys", href: "#attorneys" },
     { label: "About Us", href: "#about" },
     { label: "Resources", href: "#resources" },
     { label: "Blog", href: "#blog" },
   ];
 
+  const handleNavClick = (href: string) => {
+    if (href.startsWith('#')) {
+      // Smooth scroll for anchor links
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    setIsMenuOpen(false);
+  };
+
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-      isScrolled 
-        ? 'bg-church-navy shadow-lg' 
-        : 'bg-transparent backdrop-blur-sm'
-    }`}>
-      <div className="container mx-auto px-6 lg:px-12">
-        <div className="flex justify-between items-center h-20">
+    <header 
+      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+        isScrolled 
+          ? 'bg-church-navy/95 shadow-2xl backdrop-blur-lg' 
+          : 'bg-transparent backdrop-blur-sm'
+      }`}
+      role="banner"
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16 lg:h-20">
           {/* Logo & Brand */}
-          <a href="#home" className="flex items-center space-x-3 group">
+          <Link 
+            to="/" 
+            className="flex items-center space-x-3 group"
+            aria-label="Parra Harris Law - Home"
+          >
             <img
               src={logo}
               alt="Parra Harris Law"
-              className="h-32 w-32 object-contain transition-transform group-hover:scale-110"
+              className="h-24 w-24 lg:h-32 lg:w-32 object-contain transition-transform duration-300 group-hover:scale-105"
+              loading="eager"
             />
-            {/* <span className={`text-xl font-bold tracking-tight transition-colors duration-500 ${
-              isScrolled ? 'text-white' : 'text-white drop-shadow-lg'
-            }`}>
-              Parra Harris Law
-            </span> */}
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          <nav 
+            className="hidden lg:flex items-center space-x-1"
+            aria-label="Main navigation"
+          >
             {navItems.map((item) => (
-              <a
+              <Button
                 key={item.label}
-                href={item.href}
-                className={`transition-all duration-300 text-sm font-medium tracking-wide relative py-2 after:absolute after:left-0 after:bottom-0 after:h-[1px] after:w-0 after:transition-all after:duration-300 hover:after:w-full ${
+                variant="ghost"
+                onClick={() => handleNavClick(item.href)}
+                className={`font-medium px-4 py-2 rounded-full transition-all duration-300 hover:scale-105 ${
                   isScrolled 
-                    ? 'text-white/90 hover:text-white after:bg-white' 
-                    : 'text-white/90 hover:text-secondary after:bg-white'
+                    ? 'text-white/90 hover:text-white hover:bg-white/10' 
+                    : 'text-white/90 hover:text-white hover:bg-white/10'
                 }`}
               >
                 {item.label}
-              </a>
+              </Button>
             ))}
           </nav>
 
-          {/* Desktop CTA Button */}
-          <div className="hidden lg:block">
+          {/* Desktop CTA Buttons */}
+          <div className="hidden lg:flex items-center space-x-3">
+            {/* Phone Button */}
             <Button
+              variant="ghost"
+              size="sm"
               asChild
-              className={`font-medium px-6 py-2 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg ${
-                isScrolled
-                  ? 'bg-secondary hover:bg-secondary/90 text-white border border-secondary'
-                  : 'bg-secondary hover:bg-secondary/70 text-white border border-white/30 backdrop-blur-sm'
+              className={`font-medium px-4 py-2 rounded-full transition-all duration-300 hover:scale-105 ${
+                isScrolled 
+                  ? 'text-white/90 hover:text-white hover:bg-white/10' 
+                  : 'text-white/90 hover:text-white hover:bg-white/10'
               }`}
             >
-              <a href="#donate">Get Started</a>
+              <a href="tel:904-900-1617">
+                <Phone className="w-4 h-4 mr-2" />
+                (904) 900-1617
+              </a>
+            </Button>
+
+            {/* Get Started Button */}
+            <Button
+              asChild
+              className={`font-semibold px-6 py-2.5 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-xl ${
+                isScrolled
+                  ? 'bg-gradient-to-r from-church-gold to-amber-500 hover:from-amber-500 hover:to-church-gold text-white shadow-lg'
+                  : 'bg-gradient-to-r from-church-gold to-amber-500 hover:from-amber-500 hover:to-church-gold text-white shadow-lg border border-white/20'
+              }`}
+            >
+              <Link to="/sign-up">
+                Get Started
+              </Link>
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className={`lg:hidden p-2 rounded-lg transition-colors backdrop-blur-sm ${
+            className={`lg:hidden p-2.5 rounded-xl transition-all duration-300 ${
               isScrolled 
-                ? 'text-white hover:bg-white/10' 
-                : 'text-white hover:bg-white/10'
+                ? 'text-white hover:bg-white/10 hover:scale-105' 
+                : 'text-white hover:bg-white/10 hover:scale-105'
             }`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
           >
             {isMenuOpen ? (
               <X className="h-6 w-6" />
@@ -104,35 +152,55 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden animate-slide-down">
-            <div className={`py-6 space-y-1 border-t rounded-b-2xl ${
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="lg:hidden overflow-hidden"
+          >
+            <div className={`py-4 space-y-2 border-t rounded-b-2xl ${
               isScrolled
-                ? 'bg-church-navy border-white/20'
-                : 'bg-black/80 backdrop-blur-xl border-white/20'
+                ? 'bg-church-navy/95 border-white/20 backdrop-blur-lg'
+                : 'bg-church-navy/95 border-white/20 backdrop-blur-lg'
             }`}>
               {navItems.map((item) => (
-                <a
+                <Button
                   key={item.label}
-                  href={item.href}
-                  className="block px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 font-normal transition-all duration-200 rounded-lg"
-                  onClick={() => setIsMenuOpen(false)}
+                  variant="ghost"
+                  onClick={() => handleNavClick(item.href)}
+                  className="w-full justify-start px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 font-normal transition-all duration-200 rounded-lg"
                 >
                   {item.label}
-                </a>
+                </Button>
               ))}
-              <div className="px-4 pt-4">
+              
+              {/* Mobile CTA Buttons */}
+              <div className="px-4 pt-2 space-y-3">
+                {/* Phone Button */}
                 <Button
-                  className={`w-full font-medium py-3 rounded-full transition-all duration-300 ${
-                    isScrolled
-                      ? 'bg-secondary hover:bg-secondary/90 text-white'
-                      : 'bg-white/20 hover:bg-white/30 text-white border border-white/30 backdrop-blur-sm'
-                  }`}
+                  variant="ghost"
+                  className="w-full justify-center px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 font-medium transition-all duration-200 rounded-lg"
+                  asChild
                 >
-                  Contact Us
+                  <a href="tel:904-900-1617">
+                    <Phone className="w-4 h-4 mr-2" />
+                    Call Now
+                  </a>
+                </Button>
+
+                {/* Get Started Button */}
+                <Button
+                  className="w-full bg-gradient-to-r from-church-gold to-amber-500 hover:from-amber-500 hover:to-church-gold text-white font-semibold py-3 rounded-full transition-all duration-300 hover:shadow-xl"
+                  asChild
+                >
+                  <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
+                    Get Started
+                  </Link>
                 </Button>
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
       </div>
     </header>

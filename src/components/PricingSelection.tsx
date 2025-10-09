@@ -3,6 +3,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Star, Crown, MessageCircle, Download, FileText, Shield, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const PricingSection = () => {
   const plans = [
@@ -24,6 +25,7 @@ const PricingSection = () => {
         { icon: MessageCircle, text: "Email support" }
       ],
       cta: "Get Started",
+      route: "/diy-plan",
       popular: true
     },
     {
@@ -45,6 +47,7 @@ const PricingSection = () => {
         { icon: Check, text: "Custom clause insertion" }
       ],
       cta: "Get Started",
+      route: "/advance-plan",
       highlighted: true
     },
     {
@@ -59,7 +62,8 @@ const PricingSection = () => {
         { icon: MessageCircle, text: "Video conference" },
         { icon: Download, text: "Post-meeting notes" }
       ],
-      cta: "Add to Plan"
+      cta: "Book Consultation",
+      route: "/book-consultation"
     }
   ];
 
@@ -189,14 +193,19 @@ const PricingSection = () => {
                 {/* Card Footer */}
                 <CardFooter>
                   <Button 
+                    asChild
                     className={`w-full py-6 text-base font-semibold ${
                       plan.highlighted 
                         ? 'church-button' 
+                        : plan.name === "Consultation Add-on"
+                        ? 'bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-indigo-500 hover:to-purple-500 text-white shadow-divine'
                         : 'bg-church-navy hover:bg-church-navy/90 text-white shadow-divine'
                     }`}
                     size="lg"
                   >
-                    {plan.cta}
+                    <Link to={plan.route}>
+                      {plan.cta}
+                    </Link>
                   </Button>
                 </CardFooter>
               </Card>
@@ -212,6 +221,9 @@ const PricingSection = () => {
           viewport={{ once: true }}
           className="text-center"
         >
+          <p className="text-gray-600 mb-4">
+            All plans start with our comprehensive co-parenting questionnaire
+          </p>
           <a 
             href="/pricing" 
             className="inline-flex items-center gap-2 text-church-gold hover:text-church-navy font-semibold transition-colors duration-300 group"
