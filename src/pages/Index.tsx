@@ -7,6 +7,7 @@ import PricingSection from "@/components/PricingSelection";
 import Benefits from "@/components/Benefits";
 import Award from "@/components/Award";
 import ContactUs from "@/components/ContactUs";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
@@ -21,9 +22,8 @@ const Index = () => {
         <Benefits/>
         <Award/>
         <ContactUs/>
-
       </main>
- 
+        <Footer/>
     </div>
   );
 };

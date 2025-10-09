@@ -19,9 +19,9 @@ import processImage from "@/assets/Consultation.jpg";
 import consultationImage from "@/assets/family.jpg";
 import strategyImage from "@/assets/Strategy.jpg";
 import resolutionImage from "@/assets/LandlordHero.jpg";
-import howItWorksVideo from "@/assets/testimonial.mp4"; 
-
-// Video Modal Component
+import howItWorksVideo from "@/assets/testimonial.mp4";
+import practiceAreaImage from "@/assets/family.jpg"; 
+// Video Modal Component (unchanged)
 const VideoModal = ({ isOpen, onClose, videoSrc }: { isOpen: boolean; onClose: () => void; videoSrc: string }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -127,16 +127,16 @@ const HowWeWork = () => {
   ];
 
   const practiceAreas = [
-    { name: "Adoption", icon: Heart },
-    { name: "Child Support", icon: Users },
-    { name: "Child Custody", icon: Shield },
-    { name: "Divorce", icon: FileCheck },
-    { name: "Domestic Violence", icon: Shield },
-    { name: "Family Law Mediation", icon: Target },
-    { name: "High-Net Worth Divorce", icon: Award },
-    { name: "Prenuptial Agreements", icon: FileCheck },
-    { name: "Post-Judgment Enforcement", icon: CheckCircle2 },
-    { name: "Relocation", icon: Clock },
+    { name: "Adoption", icon: Heart, color: "from-pink-500 to-rose-500" },
+    { name: "Child Support", icon: Users, color: "from-blue-500 to-cyan-500" },
+    { name: "Child Custody", icon: Shield, color: "from-emerald-500 to-green-500" },
+    { name: "Divorce", icon: FileCheck, color: "from-purple-500 to-indigo-500" },
+    { name: "Domestic Violence", icon: Shield, color: "from-red-500 to-orange-500" },
+    { name: "Family Law Mediation", icon: Target, color: "from-amber-500 to-yellow-500" },
+    // { name: "High-Net Worth Divorce", icon: Award, color: "from-amber-600 to-yellow-500" },
+    // { name: "Prenuptial Agreements", icon: FileCheck, color: "from-teal-500 to-cyan-500" },
+    // { name: "Post-Judgment Enforcement", icon: CheckCircle2, color: "from-lime-500 to-green-400" },
+    // { name: "Relocation", icon: Clock, color: "from-violet-500 to-purple-400" },
   ];
 
   const stats = [
@@ -251,7 +251,7 @@ const HowWeWork = () => {
           ))}
         </motion.div>
 
-        {/* Practice Areas Grid */}
+        {/* Practice Areas Grid - Updated Layout */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -268,33 +268,76 @@ const HowWeWork = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {practiceAreas.map((area, index) => (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Left Side - Image with CTA below */}
+            <div className="space-y-6">
               <motion.div
-                key={area.name}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.05, y: -5 }}
+                className="relative"
               >
-                <Card className="church-card text-center group cursor-pointer h-full">
-                  <CardContent className="p-4">
-                    <div className="w-12 h-12 bg-church-light-blue rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-church-gold group-hover:text-white transition-all duration-300">
-                      <area.icon className="w-6 h-6" />
-                    </div>
-                    <span className="text-sm font-medium text-church-navy group-hover:text-church-gold transition-colors duration-300">
-                      {area.name}
-                    </span>
-                  </CardContent>
-                </Card>
+                <div className="rounded-2xl overflow-hidden shadow-soft">
+                  <img 
+                    src={practiceAreaImage} 
+                    alt="Family Law Practice Areas"
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+                {/* Decorative Element */}
+                <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-gradient-to-br from-church-gold to-church-light-blue rounded-2xl opacity-20"></div>
               </motion.div>
-            ))}
+
+              {/* CTA Button below the image */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+              </motion.div>
+            </div>
+
+            {/* Right Side - Practice Areas Grid */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-4 h-full"
+            >
+              {practiceAreas.map((area, index) => (
+                <motion.div
+                  key={area.name}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="col-span-1"
+                >
+                  <Card className="church-card group cursor-pointer h-full border-0 shadow-soft hover:shadow-divine transition-all duration-300">
+                    <CardContent className="p-4 flex items-center gap-3">
+                      {/* Beautified Icon with Gradient */}
+                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br ${area.color} text-white shadow-md group-hover:shadow-lg transition-all duration-300 flex-shrink-0`}>
+                        <area.icon className="w-6 h-6" />
+                      </div>
+                      
+                      {/* Practice Area Name */}
+                      <span className="text-sm font-medium text-church-navy group-hover:text-church-gold transition-colors duration-300 leading-tight">
+                        {area.name}
+                      </span>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
         </motion.div>
 
-
-        {/* CTA Section */}
+        {/* Main CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -306,16 +349,14 @@ const HowWeWork = () => {
             Ready to begin your family law journey with confidence?
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              className="church-button text-lg py-6 px-8"
-              onClick={() => setIsVideoOpen(true)}
-            >
-              <Play className="w-5 h-5 mr-2" />
-              Watch Us in Action
-              <ArrowRight className="w-5 h-5 ml-2" />
+            <Button variant="outline" className="church-button-outline text-lg py-6 px-8"  onClick={() => setIsVideoOpen(true)}>
+                <Play className="w-5 h-5 mr-2" />
+                  Watch Our Process
+                  <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
-            <Button variant="outline" className="church-button-outline text-lg py-6 px-8">
-              Download Free Guide
+            <Button className="church-button text-lg py-6 px-8">
+              Schedule Consultation
+              <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </div>
         </motion.div>

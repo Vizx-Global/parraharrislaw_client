@@ -220,30 +220,6 @@ const PricingSection = () => {
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </a>
         </motion.div>
-
-        {/* Trust Badges */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="text-center mt-12"
-        >
-          <div className="flex flex-wrap justify-center gap-8 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-church-gold" />
-              <span>Florida Bar Compliant</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-church-gold" />
-              <span>Secure Document Handling</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-church-gold" />
-              <span>Quality-service Guarantee</span>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

@@ -19,13 +19,20 @@ import {
   Star
 } from "lucide-react";
 
+import familyImage from "@/assets/family.jpg";
+import experienceImage from "@/assets/Strategy.jpg";
+import satisfactionImage from "@/assets/Consultation.jpg";
+import supportImage from "@/assets/Helpline.jpg";
+import plansImage from "@/assets/Co-Parenting.jpg";
+import successImage from "@/assets/family.jpg";
+
 const KeyFeatures = () => {
   const features = [
     {
       icon: Shield,
       headline: "Supreme Court Approved",
       description: "All templates meet Florida legal requirements and court standards",
-      badge: "Florida Compliant"
+      badge: "Florida Compliant",
     },
     {
       icon: DollarSign,
@@ -77,43 +84,54 @@ const KeyFeatures = () => {
       label: "Families Helped",
       description: "Trusted by families across Florida and beyond",
       icon: Users,
-      color: "from-blue-500/90 to-cyan-400/90"
-      
+      color: "from-blue-500/90 to-cyan-400/90",
+      bgColor: "from-blue-600/80 to-cyan-500/80",
+      image: familyImage,
     },
     {
       number: "15+",
       label: "Years Experience",
       description: "Decades of dedicated family law expertise",
       icon: Calendar,
-      color: "from-green-500/90 to-emerald-400/90"
+      color: "from-green-500/90 to-emerald-400/90",
+      bgColor: "from-green-600/80 to-emerald-500/80",
+      image: experienceImage,
     },
     {
       number: "98%",
       label: "Client Satisfaction",
       description: "Exceptional service and proven results",
       icon: Star,
-      color: "from-amber-500/90 to-yellow-400/90"
+      color: "from-amber-500/90 to-yellow-400/90",
+      bgColor: "from-amber-600/80 to-yellow-500/80",
+      image: satisfactionImage,
     },
     {
       number: "24/7",
       label: "Support",
       description: "Round-the-clock assistance for your needs",
       icon: Headphones,
-      color: "from-purple-500/90 to-indigo-400/90"
+      color: "from-purple-500/90 to-indigo-400/90",
+      bgColor: "from-purple-600/80 to-indigo-500/80",
+      image: supportImage,
     },
     {
       number: "3+",
       label: "Plans",
       description: "Comprehensive co-parenting solutions",
       icon: Award,
-      color: "from-red-500/90 to-pink-400/90"
+      color: "from-red-500/90 to-pink-400/90",
+      bgColor: "from-red-600/80 to-pink-500/80",
+      image: plansImage,
     },
     {
       number: "99%",
       label: "Success Rate",
       description: "Court-approved documents and outcomes",
       icon: CheckCircle,
-      color: "from-teal-500/90 to-cyan-400/90"
+      color: "from-teal-500/90 to-cyan-400/90",
+      bgColor: "from-teal-600/80 to-cyan-500/80",
+      image: successImage,
     }
   ];
 
@@ -218,7 +236,7 @@ const KeyFeatures = () => {
           ))}
         </motion.div>
 
-        {/* Updated Trust Indicators - SIMPLIFIED WITHOUT BACKGROUND IMAGES */}
+        {/* Updated Trust Indicators with Background Images */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -236,13 +254,13 @@ const KeyFeatures = () => {
             </p>
           </div>
 
-          {/* Stats Grid - SIMPLIFIED VERSION */}
+          {/* Stats Grid with Background Images */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
           >
             {trustIndicators.map((stat, index) => (
               <motion.div
@@ -253,47 +271,62 @@ const KeyFeatures = () => {
                   y: -5,
                   transition: { duration: 0.3 }
                 }}
-                className="group"
+                className="group h-full"
               >
-                <Card className="church-card border-2 border-church-gold/20 bg-gradient-to-br from-white to-church-cream/50 backdrop-blur-sm hover:border-church-gold/40 hover:shadow-golden transition-all duration-300 h-full">
-                  <CardContent className="p-6 text-center">
-                    {/* Icon with Gradient Background */}
-                    <motion.div
-                      whileHover={{ 
-                        scale: 1.1,
-                        rotate: 5
-                      }}
-                      transition={{ duration: 0.3 }}
-                      className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${stat.color} flex items-center justify-center text-white shadow-lg group-hover:shadow-xl transition-all duration-300`}
-                    >
-                      <stat.icon className="w-8 h-8" />
-                    </motion.div>
+                <Card className="church-card border-0 bg-transparent shadow-none overflow-hidden h-full">
+                  <CardContent className="p-0 relative rounded-2xl overflow-hidden h-full min-h-[280px]">
+                    {/* Background Image with Overlay */}
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                      style={{ backgroundImage: `url(${stat.image})` }}
+                    />
+                    
+                  {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-black bg-opacity-40 transition-all duration-500 group-hover:bg-opacity-30" />
+                    
+                    {/* Content Container */}
+                    <div className="relative z-10 p-6 h-full flex flex-col justify-center items-center text-white">
+                      {/* Icon with Gradient Background */}
+                      <motion.div
+                        whileHover={{ 
+                          scale: 1.1,
+                          rotate: 5
+                        }}
+                        transition={{ duration: 0.3 }}
+                        className={`w-16 h-16 mb-4 rounded-2xl bg-gradient-to-br ${stat.color} flex items-center justify-center text-white shadow-lg group-hover:shadow-xl transition-all duration-300 backdrop-blur-sm`}
+                      >
+                        <stat.icon className="w-8 h-8" />
+                      </motion.div>
 
-                    {/* Main Number */}
-                    <motion.div
-                      initial={{ scale: 0.5 }}
-                      whileInView={{ scale: 1 }}
-                      transition={{ 
-                        duration: 0.6,
-                        delay: index * 0.1,
-                        type: "spring",
-                        stiffness: 100
-                      }}
-                      viewport={{ once: true }}
-                      className="text-3xl md:text-4xl font-bold text-church-navy mb-2"
-                    >
-                      {stat.number}
-                    </motion.div>
+                      {/* Main Number */}
+                      <motion.div
+                        initial={{ scale: 0.5 }}
+                        whileInView={{ scale: 1 }}
+                        transition={{ 
+                          duration: 0.6,
+                          delay: index * 0.1,
+                          type: "spring",
+                          stiffness: 100
+                        }}
+                        viewport={{ once: true }}
+                        className="text-5xl font-bold text-white mb-2 font-serif"
+                      >
+                        {stat.number}
+                      </motion.div>
 
-                    {/* Label */}
-                    <h4 className="text-lg font-semibold text-church-navy mb-2">
-                      {stat.label}
-                    </h4>
+                      {/* Label */}
+                      <h4 className="text-lg font-semibold mb-2 text-church-gold drop-shadow-lg text-center">
+                        {stat.label}
+                      </h4>
 
-                    {/* Description */}
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      {stat.description}
-                    </p>
+                      {/* Description */}
+                      <p className="text-white/90 text-sm leading-relaxed text-center drop-shadow-lg max-w-[200px]">
+                        {stat.description}
+                      </p>
+                    </div>
+
+                    {/* Hover Effect Overlay */}
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 z-20" />
                   </CardContent>
                 </Card>
               </motion.div>
