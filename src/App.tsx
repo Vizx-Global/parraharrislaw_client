@@ -5,6 +5,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound"; 
+import Attorneys from "./pages/Attorneys";
+import AboutUs from "./pages/AboutUs";
+import Contact from "./pages/Contact";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 import ChatBubble from "@/components/ChatBubble"; 
 import SignUpForm from "@/pages/Authentication/Registration";
@@ -26,6 +29,10 @@ const App = () => (
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/diy-plan" element={<DIY />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/attorneys" element={<Attorneys />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/contact" element={<Contact />} />
+
         </Routes>
       </BrowserRouter>
       

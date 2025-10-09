@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Replaced Link with useNavigate
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone } from "lucide-react";
 import { motion } from "framer-motion";
@@ -8,15 +8,11 @@ import logo from "@/assets/Parra_Harris-Final.png";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const navigate = useNavigate(); // Added useNavigate hook
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.scrollY > 100;
-      setIsScrolled(scrolled);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 100);
 
-    // Throttle scroll events for better performance
     let ticking = false;
     const throttledScroll = () => {
       if (!ticking) {
@@ -28,56 +24,48 @@ const Header = () => {
       }
     };
 
-    window.addEventListener('scroll', throttledScroll, { passive: true });
-    return () => window.removeEventListener('scroll', throttledScroll);
+    window.addEventListener("scroll", throttledScroll, { passive: true });
+    return () => window.removeEventListener("scroll", throttledScroll);
   }, []);
 
   const navItems = [
     { label: "Home", href: "/" },
     { label: "Practice Areas", href: "#practice-areas" },
-    { label: "Attorneys", href: "#attorneys" },
-    { label: "About Us", href: "#about" },
+    { label: "Attorneys", href: "/attorneys" },
+    { label: "About Us", href: "/about" },
     { label: "Resources", href: "#resources" },
     { label: "Blog", href: "#blog" },
   ];
 
   const handleNavClick = (href: string) => {
-    if (href.startsWith('#')) {
-      // Smooth scroll for anchor links
-      const targetId = href.substring(1);
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth' });
-      }
+    if (href.startsWith("#")) {
+      const target = document.getElementById(href.slice(1));
+      if (target) target.scrollIntoView({ behavior: "smooth" });
     } else {
-      // Use navigate for route changes
       navigate(href);
     }
     setIsMenuOpen(false);
   };
 
-  const handleLogoClick = () => {
-    navigate("/");
-  };
-
-  const handleGetStartedClick = () => {
+  const handleLogoClick = () => navigate("/");
+  const handleSignUpClick = () => {
     navigate("/sign-up");
     setIsMenuOpen(false);
   };
 
   return (
-    <header 
+    <header
       className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-        isScrolled 
-          ? 'bg-church-navy/95 shadow-2xl backdrop-blur-lg' 
-          : 'bg-transparent backdrop-blur-sm'
+        isScrolled
+          ? "bg-church-navy/95 shadow-2xl backdrop-blur-lg"
+          : "bg-transparent backdrop-blur-sm"
       }`}
       role="banner"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 lg:h-20">
-          {/* Logo & Brand */}
-          <button 
+          {/* Logo */}
+          <button
             onClick={handleLogoClick}
             className="flex items-center space-x-3 group"
             aria-label="Parra Harris Law - Home"
@@ -90,8 +78,8 @@ const Header = () => {
             />
           </button>
 
-          {/* Desktop Navigation */}
-          <nav 
+          {/* Desktop nav */}
+          <nav
             className="hidden lg:flex items-center space-x-1"
             aria-label="Main navigation"
           >
@@ -101,9 +89,9 @@ const Header = () => {
                 variant="ghost"
                 onClick={() => handleNavClick(item.href)}
                 className={`font-medium px-4 py-2 rounded-full transition-all duration-300 hover:scale-105 ${
-                  isScrolled 
-                    ? 'text-white/90 hover:text-white hover:bg-white/10' 
-                    : 'text-white/90 hover:text-white hover:bg-white/10'
+                  isScrolled
+                    ? "text-white/90 hover:text-white hover:bg-white/10"
+                    : "text-white/90 hover:text-white hover:bg-white/10"
                 }`}
               >
                 {item.label}
@@ -111,17 +99,16 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Desktop CTA Buttons */}
+          {/* Desktop CTAs */}
           <div className="hidden lg:flex items-center space-x-3">
-            {/* Phone Button */}
             <Button
               variant="ghost"
               size="sm"
               asChild
               className={`font-medium px-4 py-2 rounded-full transition-all duration-300 hover:scale-105 ${
-                isScrolled 
-                  ? 'text-white/90 hover:text-white hover:bg-white/10' 
-                  : 'text-white/90 hover:text-white hover:bg-white/10'
+                isScrolled
+                  ? "text-white/90 hover:text-white hover:bg-white/10"
+                  : "text-white/90 hover:text-white hover:bg-white/10"
               }`}
             >
               <a href="tel:904-900-1617">
@@ -130,27 +117,26 @@ const Header = () => {
               </a>
             </Button>
 
-            {/* Get Started Button */}
             <Button
-              onClick={handleGetStartedClick}
+              onClick={handleSignUpClick}
               className={`font-semibold px-6 py-2.5 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-xl ${
                 isScrolled
-                  ? 'bg-gradient-to-r from-church-gold to-amber-500 hover:from-amber-500 hover:to-church-gold text-white shadow-lg'
-                  : 'bg-gradient-to-r from-church-gold to-amber-500 hover:from-amber-500 hover:to-church-gold text-white shadow-lg border border-white/20'
+                  ? "bg-gradient-to-r from-church-gold to-amber-500 hover:from-amber-500 hover:to-church-gold text-white shadow-lg"
+                  : "bg-gradient-to-r from-church-gold to-amber-500 hover:from-amber-500 hover:to-church-gold text-white shadow-lg border border-white/20"
               }`}
             >
-              Get Started
+              Sign Up
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile toggle */}
           <button
             className={`lg:hidden p-2.5 rounded-xl transition-all duration-300 ${
-              isScrolled 
-                ? 'text-white hover:bg-white/10 hover:scale-105' 
-                : 'text-white hover:bg-white/10 hover:scale-105'
+              isScrolled
+                ? "text-white hover:bg-white/10 hover:scale-105"
+                : "text-white hover:bg-white/10 hover:scale-105"
             }`}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={() => setIsMenuOpen((v) => !v)}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMenuOpen}
           >
@@ -162,20 +148,22 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile nav */}
         {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
             className="lg:hidden overflow-hidden"
           >
-            <div className={`py-4 space-y-2 border-t rounded-b-2xl ${
-              isScrolled
-                ? 'bg-church-navy/95 border-white/20 backdrop-blur-lg'
-                : 'bg-church-navy/95 border-white/20 backdrop-blur-lg'
-            }`}>
+            <div
+              className={`py-4 space-y-2 border-t rounded-b-2xl ${
+                isScrolled
+                  ? "bg-church-navy/95 border-white/20 backdrop-blur-lg"
+                  : "bg-church-navy/95 border-white/20 backdrop-blur-lg"
+              }`}
+            >
               {navItems.map((item) => (
                 <Button
                   key={item.label}
@@ -186,10 +174,8 @@ const Header = () => {
                   {item.label}
                 </Button>
               ))}
-              
-              {/* Mobile CTA Buttons */}
+
               <div className="px-4 pt-2 space-y-3">
-                {/* Phone Button */}
                 <Button
                   variant="ghost"
                   className="w-full justify-center px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 font-medium transition-all duration-200 rounded-lg"
@@ -201,12 +187,11 @@ const Header = () => {
                   </a>
                 </Button>
 
-                {/* Get Started Button */}
                 <Button
-                  onClick={handleGetStartedClick}
+                  onClick={handleSignUpClick}
                   className="w-full bg-gradient-to-r from-church-gold to-amber-500 hover:from-amber-500 hover:to-church-gold text-white font-semibold py-3 rounded-full transition-all duration-300 hover:shadow-xl"
                 >
-                  Get Started
+                  Sign Up
                 </Button>
               </div>
             </div>
