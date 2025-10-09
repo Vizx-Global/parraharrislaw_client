@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound"; 
 import ScrollToTopButton from "@/components/ScrollToTopButton";
+import ChatBubble from "@/components/ChatBubble"; // Import the ChatBubble
 
 const queryClient = new QueryClient();
 
@@ -20,7 +21,10 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
-      <ScrollToTopButton/>
+      
+      {/* Both components will appear in bottom right */}
+      <ScrollToTopButton />
+      <ChatBubble />
     </TooltipProvider>
   </QueryClientProvider>
 );
