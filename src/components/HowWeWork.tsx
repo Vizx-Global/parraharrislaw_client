@@ -299,41 +299,41 @@ const HowWeWork = () => {
               >
               </motion.div>
             </div>
-
             {/* Right Side - Practice Areas Grid */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-4 h-full"
-            >
-              {practiceAreas.map((area, index) => (
-                <motion.div
-                  key={area.name}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  className="col-span-1"
-                >
-                  <Card className="church-card group cursor-pointer h-full border-0 shadow-soft hover:shadow-divine transition-all duration-300">
-                    <CardContent className="p-4 flex items-center gap-3">
-                      {/* Beautified Icon with Gradient */}
-                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br ${area.color} text-white shadow-md group-hover:shadow-lg transition-all duration-300 flex-shrink-0`}>
-                        <area.icon className="w-6 h-6" />
-                      </div>
-                      
-                      {/* Practice Area Name */}
-                      <span className="text-sm font-medium text-church-navy group-hover:text-church-gold transition-colors duration-300 leading-tight">
-                        {area.name}
-                      </span>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </motion.div>
+<motion.div
+  initial={{ opacity: 0, x: 30 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.6, delay: 0.2 }}
+  viewport={{ once: true }}
+  className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-4 h-full"
+>
+  {practiceAreas.map((area, index) => (
+    <motion.div
+      key={area.name}
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.4, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      whileHover={{ scale: 1.05, y: -5 }}
+      className="col-span-1"
+    >
+      <Card className="church-card group cursor-pointer h-full border-0 shadow-soft hover:shadow-divine transition-all duration-300">
+        <CardContent className="p-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-center sm:text-left">
+          {/* Beautified Icon with Gradient */}
+          <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br ${area.color} text-white shadow-md group-hover:shadow-lg transition-all duration-300 flex-shrink-0 mx-auto sm:mx-0`}>
+            <area.icon className="w-6 h-6" />
+          </div>
+          
+          {/* Practice Area Name - Below icon on mobile, beside on desktop */}
+          <span className="text-sm font-medium text-church-navy group-hover:text-church-gold transition-colors duration-300 leading-tight">
+            {area.name}
+          </span>
+        </CardContent>
+      </Card>
+    </motion.div>
+  ))}
+</motion.div>
+
           </div>
         </motion.div>
 
