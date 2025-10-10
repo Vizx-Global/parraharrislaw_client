@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Logo from '@/assets/Parra_Harris-Final.png';
 import { Scale, Mail, Lock, Eye, EyeOff, AlertCircle, Users, Shield, Clock, Award, CheckCircle, FileText } from 'lucide-react';
 
 export default function SignInPage() {
@@ -7,6 +8,7 @@ export default function SignInPage() {
     email: '',
     password: '',
   });
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -97,10 +99,18 @@ export default function SignInPage() {
 
           <div className="relative z-10 flex flex-col justify-center h-full">
             {/* Logo */}
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-12 h-12 bg-gradient-to-br from-church-gold to-amber-500 rounded-xl flex items-center justify-center shadow-golden">
-                <Scale className="w-7 h-7 text-white" />
-              </div>
+            <div className="flex items-center gap-3">
+              <div 
+                className=" flex items-center justify-center  cursor-pointer"
+                  onClick={() => window.location.href = "/"}
+                    >
+                    <img 
+                    src={Logo} 
+                    alt="Parra Harris Law Logo" 
+                    className="w-24 h-24 object-contain"
+                       />
+               </div>
+   
               <div>
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-white to-church-gold bg-clip-text text-transparent">
                   Parra Harris Law
@@ -111,15 +121,15 @@ export default function SignInPage() {
 
             {/* Welcome Message */}
             <div className="mb-8">
-              <h2 className="text-3xl font-bold text-white mb-4">Welcome Back</h2>
-              <p className="text-blue-100 text-lg leading-relaxed">
+              <h2 className="text-xl font-bold text-white mb-4">Welcome Back</h2>
+              <p className="text-blue-100 text-sm leading-relaxed">
                 Access your client portal to manage your case, view documents, and communicate with your legal team.
               </p>
             </div>
 
             {/* Benefits Grid */}
             <div className="space-y-4">
-              <h3 className="text-xl font-bold text-white mb-4">Client Portal Features</h3>
+              <h3 className="text-xl font-bold text-white">Client Portal Features</h3>
               {benefits.map((benefit, index) => (
                 <div
                   key={benefit.title}
@@ -285,8 +295,8 @@ export default function SignInPage() {
           {/* Footer */}
           <div className="text-center mt-6">
             <p className="text-gray-500 text-sm">
-              © 2024 Parra Harris Law. All rights reserved.
-            </p>
+  © {new Date().getFullYear()} Parra Harris Law. All rights reserved.
+</p>
           </div>
         </div>
       </div>

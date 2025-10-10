@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { TypeAnimation } from 'react-type-animation';
+import Logo from '@/assets/Parra_Harris-Final.png';
 import { Scale, Users, FileText, Shield, Clock, Award, CheckCircle, User, Mail, Phone, Lock, ChevronRight, ArrowRight } from 'lucide-react';
 
 export default function SignUpPage() {
@@ -82,7 +83,7 @@ export default function SignUpPage() {
                     <input
                       type="text"
                       placeholder="John"
-                      className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-church-gold focus:ring-2 focus:ring-church-gold/20 transition-all duration-300 bg-white/50"
+                      className="w-full pl-12 pr-4 py-2 border-2 border-gray-200 rounded-xl focus:border-church-gold focus:ring-2 focus:ring-church-gold/20 transition-all duration-300 bg-white/50"
                       value={formData.firstName}
                       onChange={(e) => handleChange('firstName', e.target.value)}
                     />
@@ -96,7 +97,7 @@ export default function SignUpPage() {
                     <input
                       type="text"
                       placeholder="Doe"
-                      className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-church-gold focus:ring-2 focus:ring-church-gold/20 transition-all duration-300 bg-white/50"
+                      className="w-full pl-12 pr-4 py-2 border-2 border-gray-200 rounded-xl focus:border-church-gold focus:ring-2 focus:ring-church-gold/20 transition-all duration-300 bg-white/50"
                       value={formData.lastName}
                       onChange={(e) => handleChange('lastName', e.target.value)}
                     />
@@ -111,7 +112,7 @@ export default function SignUpPage() {
                   <input
                     type="email"
                     placeholder="john.doe@example.com"
-                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-church-gold focus:ring-2 focus:ring-church-gold/20 transition-all duration-300 bg-white/50"
+                    className="w-full pl-12 pr-4 py-2 border-2 border-gray-200 rounded-xl focus:border-church-gold focus:ring-2 focus:ring-church-gold/20 transition-all duration-300 bg-white/50"
                     value={formData.email}
                     onChange={(e) => handleChange('email', e.target.value)}
                   />
@@ -125,7 +126,7 @@ export default function SignUpPage() {
                   <input
                     type="tel"
                     placeholder="(904) 555-0123"
-                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-church-gold focus:ring-2 focus:ring-church-gold/20 transition-all duration-300 bg-white/50"
+                    className="w-full pl-12 pr-4 py-2 border-2 border-gray-200 rounded-xl focus:border-church-gold focus:ring-2 focus:ring-church-gold/20 transition-all duration-300 bg-white/50"
                     value={formData.phone}
                     onChange={(e) => handleChange('phone', e.target.value)}
                   />
@@ -135,7 +136,7 @@ export default function SignUpPage() {
               <button
                 onClick={next}
                 disabled={!formData.firstName || !formData.lastName || !formData.email || !formData.phone}
-                className="w-full bg-gradient-to-r from-church-gold to-amber-500 hover:from-amber-500 hover:to-church-gold text-white py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl disabled:opacity-50 disabled:scale-100 disabled:shadow-none flex items-center justify-center gap-3 group"
+                className="w-full bg-gradient-to-r from-church-gold to-amber-500 hover:from-amber-500 hover:to-church-gold text-white py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl disabled:opacity-50 disabled:scale-100 disabled:shadow-none flex items-center justify-center gap-3 group"
               >
                 Continue to Next Step
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -151,7 +152,7 @@ export default function SignUpPage() {
                 <div className="relative group">
                   <FileText className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 group-focus-within:text-church-gold transition-colors z-10" />
                   <select
-                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-church-gold focus:ring-2 focus:ring-church-gold/20 transition-all duration-300 bg-white/50 backdrop-blur-sm appearance-none cursor-pointer"
+                    className="w-full pl-12 pr-4 py-2 border-2 border-gray-200 rounded-xl focus:border-church-gold focus:ring-2 focus:ring-church-gold/20 transition-all duration-300 bg-white/50 backdrop-blur-sm appearance-none cursor-pointer"
                     value={formData.service}
                     onChange={(e) => handleChange('service', e.target.value)}
                   >
@@ -172,7 +173,7 @@ export default function SignUpPage() {
                 <div className="relative group">
                   <Clock className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 group-focus-within:text-church-gold transition-colors z-10" />
                   <select
-                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-church-gold focus:ring-2 focus:ring-church-gold/20 transition-all duration-300 bg-white/50 backdrop-blur-sm appearance-none cursor-pointer"
+                    className="w-full pl-12 pr-4 py-2 border-2 border-gray-200 rounded-xl focus:border-church-gold focus:ring-2 focus:ring-church-gold/20 transition-all duration-300 bg-white/50 backdrop-blur-sm appearance-none cursor-pointer"
                     value={formData.urgency}
                     onChange={(e) => handleChange('urgency', e.target.value)}
                   >
@@ -188,7 +189,7 @@ export default function SignUpPage() {
               <div className="flex gap-4 pt-4">
                 <button
                   onClick={back}
-                  className="flex-1 border-2 border-gray-300 text-gray-700 py-4 rounded-xl font-semibold transition-all duration-300 hover:border-church-gold hover:text-church-gold hover:scale-105 flex items-center justify-center gap-2"
+                  className="flex-1 border-2 border-gray-300 text-gray-700 py-2 rounded-xl font-semibold transition-all duration-300 hover:border-church-gold hover:text-church-gold hover:scale-105 flex items-center justify-center gap-2"
                 >
                   <ChevronRight className="w-4 h-4 rotate-180" />
                   Back
@@ -196,7 +197,7 @@ export default function SignUpPage() {
                 <button
                   onClick={next}
                   disabled={!formData.service || !formData.urgency}
-                  className="flex-1 bg-gradient-to-r from-church-gold to-amber-500 hover:from-amber-500 hover:to-church-gold text-white py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl disabled:opacity-50 disabled:scale-100 disabled:shadow-none"
+                  className="flex-1 bg-gradient-to-r from-church-gold to-amber-500 hover:from-amber-500 hover:to-church-gold text-white py-2 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl disabled:opacity-50 disabled:scale-100 disabled:shadow-none"
                 >
                   Create Account
                 </button>
@@ -207,7 +208,7 @@ export default function SignUpPage() {
           {/* Step 3: Account Security */}
           {step === 3 && (
             <div className="space-y-6">
-              <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200 rounded-2xl p-6">
+              <div className="bg-gradient-divine border border-blue-200 rounded-2xl p-3">
                 <div className="flex items-center gap-3">
                   <Shield className="w-6 h-6 text-church-gold" />
                   <div>
@@ -224,7 +225,7 @@ export default function SignUpPage() {
                   <input
                     type="password"
                     placeholder="Create your password"
-                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-church-gold focus:ring-2 focus:ring-church-gold/20 transition-all duration-300 bg-white/50"
+                    className="w-full pl-12 pr-4 py-2 border-2 border-gray-200 rounded-xl focus:border-church-gold focus:ring-2 focus:ring-church-gold/20 transition-all duration-300 bg-white/50"
                     value={formData.password}
                     onChange={(e) => handleChange('password', e.target.value)}
                   />
@@ -238,7 +239,7 @@ export default function SignUpPage() {
                   <input
                     type="password"
                     placeholder="Confirm your password"
-                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-church-gold focus:ring-2 focus:ring-church-gold/20 transition-all duration-300 bg-white/50"
+                    className="w-full pl-12 pr-4 py-2 border-2 border-gray-200 rounded-xl focus:border-church-gold focus:ring-2 focus:ring-church-gold/20 transition-all duration-300 bg-white/50"
                     value={formData.confirmPassword}
                     onChange={(e) => handleChange('confirmPassword', e.target.value)}
                   />
@@ -248,14 +249,14 @@ export default function SignUpPage() {
               <div className="flex gap-4 pt-4">
                 <button
                   onClick={back}
-                  className="flex-1 border-2 border-gray-300 text-gray-700 py-4 rounded-xl font-semibold transition-all duration-300 hover:border-church-gold hover:text-church-gold hover:scale-105 flex items-center justify-center gap-2"
+                  className="flex-1 border-2 border-gray-300 text-gray-700 py-2 rounded-xl font-semibold transition-all duration-300 hover:border-church-gold hover:text-church-gold hover:scale-105 flex items-center justify-center gap-2"
                 >
                   <ChevronRight className="w-4 h-4 rotate-180" />
                   Back
                 </button>
                 <button
                   onClick={handleSubmit}
-                  className="flex-1 bg-gradient-to-r from-church-gold to-amber-500 hover:from-amber-500 hover:to-church-gold text-white py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center justify-center gap-2 group"
+                  className="flex-1 bg-gradient-to-r from-church-gold to-amber-500 hover:from-amber-500 hover:to-church-gold text-white py-2 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center justify-center gap-2 group"
                 >
                   Create Account
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -267,9 +268,16 @@ export default function SignUpPage() {
 
         {/* RIGHT: Banner Info (Unchanged but kept for completeness) */}
         <div className="bg-gradient-to-br from-church-navy via-church-navy/95 to-church-light-blue/20 text-white p-8 hidden lg:flex flex-col relative items-center justify-start">
-          <Link to="/" className="mb-6 mt-2">
-            <Scale className="w-16 h-16 text-church-gold" />
-          </Link>
+         <div 
+                className=" flex items-center justify-center  cursor-pointer"
+                  onClick={() => window.location.href = "/"}
+                    >
+                    <img 
+                    src={Logo} 
+                    alt="Parra Harris Law Logo" 
+                    className="w-32 h-32 object-contain"
+                       />
+               </div>
           <h3 className="text-xl text-church-gold font-bold mb-4 text-center">Why Choose Parra Harris Law?</h3>
 
           <ul className="w-full space-y-4 text-sm">

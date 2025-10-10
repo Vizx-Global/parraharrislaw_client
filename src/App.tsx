@@ -9,7 +9,7 @@ import ScrollToTopButton from "@/components/ScrollToTopButton";
 import ChatBubble from "@/components/ChatBubble"; 
 import SignUpForm from "@/pages/Authentication/Registration";
 import SignIn from "@/pages/Authentication/Login";
-import DIY from "@/pages/Questionnaires/DIY";
+import DIY from "@/pages/Questionnaires/InteractiveCoParentingQuestionnaire";
 
 
 const queryClient = new QueryClient();
