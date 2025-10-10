@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import Header from "@/components/Header";
 import teamPhoto from "@/assets/LandlordHero.jpg"; // placeholder team image
+import Footer from "@/components/Footer";
+
+
+import aboutVideo from "@/assets/about-video.mp4"; // <-- rename to your actual file
+// (optional) a still frame poster image
+// import videoPoster from "@/assets/about-us-poster.jpg";
 
 // ---- Inline styles: keep CTA micro-interactions only (no card float) ----
 const Styles = () => (
@@ -21,7 +27,7 @@ const Styles = () => (
   `}</style>
 );
 
-type MissionItem = { title: string; body: string; };
+type MissionItem = { title: string; body: string };
 
 const missionValues: MissionItem[] = [
   {
@@ -40,23 +46,6 @@ const missionValues: MissionItem[] = [
       "Our attorneys are committed to providing the citizens of Jacksonville and surrounding areas with superior legal representation. Our record of successful results and our clients’ testimonials offer proof of our history of providing excellent representation and legal services to our clients.",
   },
 ];
-
-const YouTubeEmbed: React.FC<{ videoId: string; title?: string }> = ({
-  videoId,
-  title = "Parra Harris Law — About Us",
-}) => (
-  <div className="relative w-full overflow-hidden rounded-xl shadow-md">
-    <div className="pt-[56.25%]" />
-    <iframe
-      className="absolute left-0 top-0 h-full w-full"
-      src={`https://www.youtube.com/embed/${videoId}`}
-      title={title}
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowFullScreen
-      loading="lazy"
-    />
-  </div>
-);
 
 const AboutUs: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -135,10 +124,25 @@ const AboutUs: React.FC = () => {
           </div>
         </section>
 
-        {/* VIDEO */}
-        <section className="mt-12">
-          <YouTubeEmbed videoId="VIDEO_ID" />
-        </section>
+        {/* VIDEO — responsive HTML5 player using your MP4 */}
+<section className="mt-12">
+  <div className="relative w-full overflow-hidden rounded-xl shadow-md">
+    {/* 16:9 aspect ratio spacer */}
+    <div className="pt-[56.25%]" />
+    <video
+      className="absolute left-0 top-0 h-full w-full"
+      src={aboutVideo}                 // direct src fallback
+      controls
+      playsInline
+      preload="metadata"
+      // poster={videoPoster}           // optional poster
+    >
+      <source src={aboutVideo} type="video/mp4" />  {/* <-- fixed MIME type */}
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</section>
+
 
         {/* MISSION & VALUES — static cards, thin gradient border on hover */}
         <section className="mt-16">
@@ -152,7 +156,7 @@ const AboutUs: React.FC = () => {
             representing their best interests.
           </p>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3 ">
             {missionValues.map((item) => (
               <div key={item.title} className="relative group">
                 {/* Thin gradient border like CTA: visible on hover */}
@@ -309,6 +313,7 @@ const AboutUs: React.FC = () => {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 };

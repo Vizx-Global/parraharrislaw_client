@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import ContactInfo from "@/components/ui/ContactInfo";
 import ContactMiniForm from "@/components/ui/ContactMiniForm";
 import ContactCard from "@/components/ui/ContactCard";
+import Footer from "@/components/Footer";
 import hero from "@/assets/contact-hero.jpg";
 
 const Contact: React.FC = () => {
@@ -59,6 +60,7 @@ const Contact: React.FC = () => {
 
       {/* FOOTER SPACE */}
       <div className="h-10" />
+      <Footer />
     </div>
   );
 };
