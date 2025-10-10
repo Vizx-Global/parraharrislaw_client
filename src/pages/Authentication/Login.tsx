@@ -166,16 +166,19 @@ export default function SignInPage() {
 
         {/* RIGHT: Sign In Form */}
         <div className="bg-white/95 backdrop-blur-lg p-8 lg:p-12">
-          {/* Mobile Header */}
-          <div className="lg:hidden text-center mb-8">
-            <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-church-gold to-amber-500 rounded-2xl flex items-center justify-center">
-                <Scale className="w-8 h-8 text-white" />
-              </div>
-            </div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Welcome Back</h1>
-            <p className="text-gray-600">Sign in to your client portal</p>
+       {/* Mobile Header */}
+        <div className="lg:hidden text-center mb-8">
+           <div 
+              className="flex justify-center mb-4 cursor-pointer group"
+              onClick={() => navigate('/')}
+              >
+             <div className="w-16 h-16 bg-gradient-to-br from-church-gold to-amber-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+         <Scale className="w-8 h-8 text-white" />
           </div>
+         </div>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">Welcome Back</h1>
+          <p className="text-gray-600">Sign in to your client portal</p>
+         </div>
 
           {/* Desktop Header */}
           <div className="hidden lg:block mb-8">
@@ -287,7 +290,7 @@ export default function SignInPage() {
                 to="/sign-up" 
                 className="text-church-gold hover:text-amber-600 font-semibold underline underline-offset-2 transition-colors"
               >
-                Create account here
+              Sign Up
               </Link>
             </p>
           </div>

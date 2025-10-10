@@ -37,6 +37,21 @@ export default function SignUpPage() {
         
         {/* LEFT: Modern Form Steps */}
         <div className="p-10 lg:p-12 text-black">
+          {/* Mobile Logo - Top Center with Scale Icon */}
+          <div className="flex justify-center mb-6 lg:hidden">
+            <div 
+              className="flex flex-col items-center justify-center cursor-pointer group"
+              onClick={() => navigate('/')}
+            >
+              <div className="w-16 h-16 bg-gradient-to-br from-church-gold to-amber-500 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
+                <Scale className="w-8 h-8 text-white" />
+              </div>
+              <p className="mt-2 text-sm font-semibold text-gray-700 group-hover:text-church-gold transition-colors duration-200">
+                Parra Harris Law
+              </p>
+            </div>
+          </div>
+
           {/* Header */}
           <div className="text-center mb-8">
             <div className='text-2xl lg:text-3xl font-bold bg-gradient-to-r from-church-gold via-amber-500 to-orange-500 bg-clip-text text-transparent mb-2'>
@@ -266,20 +281,33 @@ export default function SignUpPage() {
               </div>
             </div>
           )}
+
+          {/* Sign In Link - Now visible on mobile too */}
+          <div className="mt-8 text-center lg:hidden">
+            <p className="text-sm text-gray-600">
+              Already registered?{' '}
+              <span 
+                onClick={() => navigate('/sign-in')}
+                className="underline text-church-gold font-medium hover:text-amber-400 transition-colors duration-200 cursor-pointer"
+              >
+                Sign in
+              </span>
+            </p>
+          </div>
         </div>
 
-        {/* RIGHT: Banner Info (Unchanged but kept for completeness) */}
+        {/* RIGHT: Banner Info (Hidden on mobile) */}
         <div className="bg-gradient-to-br from-church-navy via-church-navy/95 to-church-light-blue/20 text-white p-8 hidden lg:flex flex-col relative items-center justify-start">
-         <div 
-                className=" flex items-center justify-center  cursor-pointer"
-                  onClick={() => window.location.href = "/"}
-                    >
-                    <img 
-                    src={Logo} 
-                    alt="Parra Harris Law Logo" 
-                    className="w-32 h-32 object-contain"
-                       />
-               </div>
+          <div 
+            className="flex items-center justify-center cursor-pointer"
+            onClick={() => window.location.href = "/"}
+          >
+            <img 
+              src={Logo} 
+              alt="Parra Harris Law Logo" 
+              className="w-32 h-32 object-contain"
+            />
+          </div>
           <h3 className="text-xl text-church-gold font-bold mb-4 text-center">Why Choose Parra Harris Law?</h3>
 
           <ul className="w-full space-y-4 text-sm">
@@ -327,15 +355,16 @@ export default function SignUpPage() {
             </li>
           </ul>
 
-         <p className="mt-6 text-xs text-center">
-  Already registered?{' '}
-  <span 
-    onClick={() => navigate('/sign-in')}
-    className="underline text-church-gold font-medium hover:text-amber-400 transition-colors duration-200 cursor-pointer"
-  >
-    Sign in
-  </span>
-</p>
+          {/* Sign In Link - Still visible on desktop in the right panel */}
+          <p className="mt-6 text-xs text-center">
+            Already registered?{' '}
+            <span 
+              onClick={() => navigate('/sign-in')}
+              className="underline text-church-gold font-medium hover:text-amber-400 transition-colors duration-200 cursor-pointer"
+            >
+              Sign in
+            </span>
+          </p>
         </div>
       </div>
     </div>
