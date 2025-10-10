@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Replaced Link with useNavigate
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone } from "lucide-react";
+import { motion } from "framer-motion";
 import logo from "@/assets/Parra_Harris-Final.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate(); // Added useNavigate hook
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,7 +49,19 @@ const Header = () => {
       if (targetElement) {
         targetElement.scrollIntoView({ behavior: 'smooth' });
       }
+    } else {
+      // Use navigate for route changes
+      navigate(href);
     }
+    setIsMenuOpen(false);
+  };
+
+  const handleLogoClick = () => {
+    navigate("/");
+  };
+
+  const handleGetStartedClick = () => {
+    navigate("/sign-up");
     setIsMenuOpen(false);
   };
 
@@ -63,18 +77,18 @@ const Header = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 lg:h-20">
           {/* Logo & Brand */}
-          <Link 
-            to="/" 
+          <button 
+            onClick={handleLogoClick}
             className="flex items-center space-x-3 group"
             aria-label="Parra Harris Law - Home"
           >
             <img
               src={logo}
               alt="Parra Harris Law"
-              className="h-24 w-24 lg:h-32 lg:w-32 object-contain transition-transform duration-300 group-hover:scale-105"
+              className="h-32 w-32 lg:h-32 lg:w-32 object-contain transition-transform duration-300 group-hover:scale-105"
               loading="eager"
             />
-          </Link>
+          </button>
 
           {/* Desktop Navigation */}
           <nav 
@@ -118,16 +132,14 @@ const Header = () => {
 
             {/* Get Started Button */}
             <Button
-              asChild
+              onClick={handleGetStartedClick}
               className={`font-semibold px-6 py-2.5 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-xl ${
                 isScrolled
                   ? 'bg-gradient-to-r from-church-gold to-amber-500 hover:from-amber-500 hover:to-church-gold text-white shadow-lg'
                   : 'bg-gradient-to-r from-church-gold to-amber-500 hover:from-amber-500 hover:to-church-gold text-white shadow-lg border border-white/20'
               }`}
             >
-              <Link to="/sign-up">
-                Get Started
-              </Link>
+              Get Started
             </Button>
           </div>
 
@@ -191,12 +203,10 @@ const Header = () => {
 
                 {/* Get Started Button */}
                 <Button
+                  onClick={handleGetStartedClick}
                   className="w-full bg-gradient-to-r from-church-gold to-amber-500 hover:from-amber-500 hover:to-church-gold text-white font-semibold py-3 rounded-full transition-all duration-300 hover:shadow-xl"
-                  asChild
                 >
-                  <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
-                    Get Started
-                  </Link>
+                  Get Started
                 </Button>
               </div>
             </div>
