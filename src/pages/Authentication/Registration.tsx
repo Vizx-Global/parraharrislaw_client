@@ -17,6 +17,8 @@ export default function SignUpPage() {
     confirmPassword: '',
   });
 
+  const navigate = useNavigate();
+
   const handleChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
@@ -325,9 +327,15 @@ export default function SignUpPage() {
             </li>
           </ul>
 
-          <p className="mt-6 text-xs text-center">
-            Already registered? <a href="/sign-in" className="underline text-church-gold font-medium">Sign in</a>
-          </p>
+         <p className="mt-6 text-xs text-center">
+  Already registered?{' '}
+  <span 
+    onClick={() => navigate('/sign-in')}
+    className="underline text-church-gold font-medium hover:text-amber-400 transition-colors duration-200 cursor-pointer"
+  >
+    Sign in
+  </span>
+</p>
         </div>
       </div>
     </div>
