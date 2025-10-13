@@ -1,24 +1,14 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { 
-  Scale, User, Users, Calendar, Phone, Mail, MapPin, Book, Heart, Shield, 
-  AlertCircle, HelpCircle, CreditCard, Lock, CheckCircle, Star, Zap, 
-  ArrowRight, ArrowLeft, Crown, Sparkles, Gift, ShieldCheck, BadgeCheck,
-  DollarSign, Wallet, AlertTriangle
-} from 'lucide-react';
-
-// Import components
 import ProgressBar from './Components/ProgressiveBar';
 import SectionHeader from './Components/SectionHeader';
 import QuestionRenderer from './Components/QuestionRenderer';
 import NavigationButtons from './Components/NavigationButtons';
 import ValidationSummary from './Components/ValidationSummary';
 import PaymentSection from './Components/PaymentSection';
-
-// Import data
+import Header from '@/components/HeaderTwo'; 
+import Footer from '@/components/Footer'; 
 import { sections, paymentMethods, initialFormData } from './data/FormData'
 
-// Helper function to get nested values
 const getNestedValue = (obj, path) => {
   if (!path) return undefined;
   return path.split('.').reduce((current, key) => {
@@ -63,23 +53,19 @@ export default function InteractiveCoParentingQuestionnaire() {
     setFormData(prev => {
       const keys = path.split('.');
       
-      // Handle simple case (no dots in path)
       if (keys.length === 1) {
         return {
           ...prev,
           [path]: value
         };
       }
-      
-      // Handle nested paths
+  
       const newData = { ...prev };
       let current = newData;
-      
-      // Navigate to the parent object
+ 
       for (let i = 0; i < keys.length - 1; i++) {
         const key = keys[i];
-        
-        // Ensure the current level exists and is an object
+  
         if (!current[key] || typeof current[key] !== 'object') {
           current[key] = {};
         } else {
@@ -87,15 +73,13 @@ export default function InteractiveCoParentingQuestionnaire() {
         }
         current = current[key];
       }
-      
-      // Set the final value
+  
       const lastKey = keys[keys.length - 1];
       current[lastKey] = value;
       
       return newData;
     });
     
-    // Clear validation error for this field when user starts typing
     if (validationErrors[path]) {
       setValidationErrors(prev => ({
         ...prev,
@@ -142,12 +126,16 @@ export default function InteractiveCoParentingQuestionnaire() {
 
   if (showPayment) {
     return (
-      <PaymentSection
-        paymentMethod={paymentMethod}
-        setPaymentMethod={setPaymentMethod}
-        prevSection={prevSection}
-        paymentMethods={paymentMethods}
-      />
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <PaymentSection
+          paymentMethod={paymentMethod}
+          setPaymentMethod={setPaymentMethod}
+          prevSection={prevSection}
+          paymentMethods={paymentMethods}
+        />
+        <Footer />
+      </div>
     );
   }
 
@@ -155,45 +143,51 @@ export default function InteractiveCoParentingQuestionnaire() {
   const progressPercentage = ((currentSection + 1) / (sections.length + 1)) * 100;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30 py-8">
-      <div className="max-w-6xl mx-auto px-4">
-        <ProgressBar
-          currentStep={currentSection + 1}
-          totalSteps={sections.length + 1}
-          percentage={progressPercentage}
-        />
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      
+      <div className="flex-1 bg-gradient-to-br from-gray-50 to-blue-50/30 mt-20 py-6">
+        <div className="max-w-6xl mx-auto px-4">
+          <ProgressBar
+            currentStep={currentSection + 1}
+            totalSteps={sections.length + 1}
+            percentage={progressPercentage}
+          />
 
-        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
-          <SectionHeader section={currentSectionData} />
+          <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
+            <SectionHeader section={currentSectionData} />
 
-          <div className="p-8">
-            <ValidationSummary 
-              showErrors={showErrors}
-              validationErrors={validationErrors}
-            />
+            <div className="p-8">
+              <ValidationSummary 
+                showErrors={showErrors}
+                validationErrors={validationErrors}
+              />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {currentSectionData.questions.map((question, index) => (
-                <QuestionRenderer
-                  key={question.id}
-                  question={question}
-                  formData={formData}
-                  handleInputChange={handleInputChange}
-                  showErrors={showErrors}
-                  validationErrors={validationErrors}
-                />
-              ))}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {currentSectionData.questions.map((question, index) => (
+                  <QuestionRenderer
+                    key={question.id}
+                    question={question}
+                    formData={formData}
+                    handleInputChange={handleInputChange}
+                    showErrors={showErrors}
+                    validationErrors={validationErrors}
+                  />
+                ))}
+              </div>
+
+              <NavigationButtons
+                currentSection={currentSection}
+                totalSections={sections.length}
+                onPrevious={prevSection}
+                onNext={nextSection}
+              />
             </div>
-
-            <NavigationButtons
-              currentSection={currentSection}
-              totalSections={sections.length}
-              onPrevious={prevSection}
-              onNext={nextSection}
-            />
           </div>
         </div>
       </div>
+      
+      <Footer />
     </div>
   );
 }

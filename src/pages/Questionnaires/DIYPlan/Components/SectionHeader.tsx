@@ -16,7 +16,7 @@ const SectionHeader = ({ section }) => {
       {/* Legal Badge Elements */}
       <div className="absolute top-2 sm:top-4 left-1/2 transform -translate-x-1/2 flex gap-2 sm:gap-3">
         <motion.div
-          className="flex items-center gap-1 bg-white/20 backdrop-blur-sm rounded-full px-2 sm:px-3 py-1 border border-white/30"
+          className="flex items-center gap-1 bg-white/20 backdrop-blur-sm rounded-full px-2 sm:px-3 border border-white/30"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}

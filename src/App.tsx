@@ -9,7 +9,8 @@ import ScrollToTopButton from "@/components/ScrollToTopButton";
 import ChatBubble from "@/components/ChatBubble"; 
 import SignUpForm from "@/pages/Authentication/Registration";
 import SignIn from "@/pages/Authentication/Login";
-import DIY from "@/pages/Questionnaires/InteractiveCoParentingQuestionnaire";
+import DIY from "@/pages/Questionnaires/DIYPlan/InteractiveCoParentingQuestionnaire";
+import AdvancedPlan from "@/pages/Questionnaires/AdvancedPlan/AdvancedCoParentingQuestionnaire";
 
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/sign-up" element={<SignUpForm />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/diy-plan" element={<DIY />} />
+          <Route path="/advance-plan" element={<AdvancedPlan />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Award, Languages, Star, Calendar } from "lucide-react";
-
-// Import images from assets
 import PaolaImage from "@/assets/PaolaParra.png";
 import LynnImage from "@/assets/Lynn.png";
 import JohnImage from "@/assets/John.png";
@@ -83,7 +81,7 @@ const AttorneysSection = () => {
            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-church-navy mb-4 leading-tight">
              Bilingual Jacksonville Family Law Attorneys & Divorce Lawyers
            </h2>
-          <p className="text-xl leading-relaxed font-light max-w-3xl mx-auto">
+          <p className="text-xl leading-relaxed font-light mx-auto">
             Meet our dedicated team of experienced family law professionals committed to protecting your family's future with compassion and expertise.
           </p>
         </motion.div>

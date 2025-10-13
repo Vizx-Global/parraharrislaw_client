@@ -3,9 +3,36 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Star, Crown, MessageCircle, Download, FileText, Shield, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Commet } from "react-loading-indicators";
+
+const FullPageLoader = () => {
+  return (
+    <div className="fixed inset-0 bg-white/90 backdrop-blur-sm z-50 flex items-center justify-center">
+      <div className="text-center">
+        <Commet color="#D4AF37" size="medium" text="" textColor="" />
+        <p className="mt-4 text-church-navy font-semibold">Loading co-parenting plan</p>
+      </div>
+    </div>
+  );
+};
 
 const PricingSection = () => {
+  const [loading, setLoading] = useState(false);
+  const [loadingRoute, setLoadingRoute] = useState("");
+  const navigate = useNavigate();
+
+  const handlePlanClick = (route: string, planName: string) => {
+    setLoadingRoute(planName);
+    setLoading(true);
+    
+    setTimeout(() => {
+      setLoading(false);
+      navigate(route); 
+    }, 2500);
+  };
+
   const plans = [
     {
       name: "DIY Plan",
@@ -100,140 +127,149 @@ const PricingSection = () => {
   };
 
   return (
-    <section id="pricing" className="py-10 bg-gradient-to-b from-white to-church-cream">
-      <div className="container mx-auto px-6 lg:px-12">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <div className="inline-flex items-center gap-2 bg-gradient-divine text-church-navy px-4 py-2 rounded-full mb-4">
-            <Shield className="w-4 h-4" />
-            <span className="text-sm font-semibold">Transparent Pricing</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-church-navy mb-4">
-            Choose the Plan That's Right For You
-          </h2>
-          <p className="text-xl leading-relaxed font-light max-w-3xl mx-auto">
-            Clear pricing, no hidden fees. All plans include Florida-compliant documents.
-          </p>
-        </motion.div>
-
-        {/* Pricing Cards */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12"
-        >
-          {plans.map((plan, index) => (
-            <motion.div
-              key={plan.name}
-              variants={cardVariants}
-              whileHover="hover"
-              className="flex flex-col h-full"
-            >
-              <Card className={`church-card h-full flex flex-col relative overflow-hidden ${
-                plan.highlighted 
-                  ? 'border-2 border-church-gold shadow-golden scale-105' 
-                  : 'border border-border'
-              }`}>
-                {/* Badge */}
-                {plan.badge && (
-                  <div className="absolute top-4 right-4 z-10">
-                    <Badge 
-                      variant={plan.badge.variant}
-                      className="bg-gradient-to-r from-church-gold to-secondary-light text-church-navy font-semibold py-1 px-3 shadow-golden"
-                    >
-                      <plan.badge.icon className="w-3 h-3 mr-1" />
-                      {plan.badge.text}
-                    </Badge>
-                  </div>
-                )}
-
-                {/* Card Header */}
-                <CardHeader className="pb-4">
-                  <h3 className="text-2xl font-bold text-church-navy">
-                    {plan.name}
-                  </h3>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-bold text-church-navy">
-                      {plan.price}
-                    </span>
-                  </div>
-                  <p className="text-muted-foreground">
-                    {plan.description}
-                  </p>
-                </CardHeader>
-
-                {/* Card Content */}
-                <CardContent className="flex-1 pb-6">
-                  <ul className="space-y-3">
-                    {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-start gap-3">
-                        <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
-                          feature.icon === Shield 
-                            ? 'bg-church-light-blue text-church-navy' 
-                            : 'bg-church-gold/20 text-church-gold'
-                        }`}>
-                          <feature.icon className="w-3 h-3" />
-                        </div>
-                        <span className="text-sm text-muted-foreground">
-                          {feature.text}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-
-                {/* Card Footer */}
-                <CardFooter>
-                  <Button 
-                    asChild
-                    className={`w-full py-6 text-base font-semibold ${
-                      plan.highlighted 
-                        ? 'church-button' 
-                        : plan.name === "Consultation Add-on"
-                        ? 'bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-indigo-500 hover:to-purple-500 text-white shadow-divine'
-                        : 'bg-church-navy hover:bg-church-navy/90 text-white shadow-divine'
-                    }`}
-                    size="lg"
-                  >
-                    <Link to={plan.route}>
-                      {plan.cta}
-                    </Link>
-                  </Button>
-                </CardFooter>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <p className="text-gray-600 mb-4">
-            All plans start with our comprehensive co-parenting questionnaire
-          </p>
-          <a 
-            href="/pricing" 
-            className="inline-flex items-center gap-2 text-church-gold hover:text-church-navy font-semibold transition-colors duration-300 group"
+    <>
+      {loading && <FullPageLoader />}
+      
+      <section id="pricing" className="py-10 bg-gradient-to-b from-white to-church-cream">
+        <div className="container mx-auto px-6 lg:px-12">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
           >
-            See detailed pricing comparison
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </a>
-        </motion.div>
-      </div>
-    </section>
+            <div className="inline-flex items-center gap-2 bg-gradient-divine text-church-navy px-4 py-2 rounded-full mb-4">
+              <Shield className="w-4 h-4" />
+              <span className="text-sm font-semibold">Transparent Pricing</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-church-navy mb-4">
+              Choose the Plan That's Right For You
+            </h2>
+            <p className="text-xl leading-relaxed font-light max-w-3xl mx-auto">
+              Clear pricing, no hidden fees. All plans include Florida-compliant documents.
+            </p>
+          </motion.div>
+
+          {/* Pricing Cards */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12"
+          >
+            {plans.map((plan, index) => (
+              <motion.div
+                key={plan.name}
+                variants={cardVariants}
+                whileHover="hover"
+                className="flex flex-col h-full"
+              >
+                <Card className={`church-card h-full flex flex-col relative overflow-hidden ${
+                  plan.highlighted 
+                    ? 'border-2 border-church-gold shadow-golden scale-105' 
+                    : 'border border-border'
+                }`}>
+                  {/* Badge */}
+                  {plan.badge && (
+                    <div className="absolute top-4 right-4 z-10">
+                      <Badge 
+                        variant={plan.badge.variant}
+                        className="bg-gradient-to-r from-church-gold to-secondary-light text-church-navy font-semibold py-1 px-3 shadow-golden"
+                      >
+                        <plan.badge.icon className="w-3 h-3 mr-1" />
+                        {plan.badge.text}
+                      </Badge>
+                    </div>
+                  )}
+
+                  {/* Card Header */}
+                  <CardHeader className="pb-4">
+                    <h3 className="text-2xl font-bold text-church-navy">
+                      {plan.name}
+                    </h3>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-4xl font-bold text-church-navy">
+                        {plan.price}
+                      </span>
+                    </div>
+                    <p className="text-muted-foreground">
+                      {plan.description}
+                    </p>
+                  </CardHeader>
+
+                  {/* Card Content */}
+                  <CardContent className="flex-1 pb-6">
+                    <ul className="space-y-3">
+                      {plan.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-start gap-3">
+                          <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                            feature.icon === Shield 
+                              ? 'bg-church-light-blue text-church-navy' 
+                              : 'bg-church-gold/20 text-church-gold'
+                          }`}>
+                            <feature.icon className="w-3 h-3" />
+                          </div>
+                          <span className="text-sm text-muted-foreground">
+                            {feature.text}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+
+                  {/* Card Footer */}
+                  <CardFooter>
+                    <Button 
+                      onClick={() => handlePlanClick(plan.route, plan.name)}
+                      className={`w-full py-6 text-base font-semibold ${
+                        plan.highlighted 
+                          ? 'church-button' 
+                          : plan.name === "Consultation Add-on"
+                          ? 'bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-indigo-500 hover:to-purple-500 text-white shadow-divine'
+                          : 'bg-church-navy hover:bg-church-navy/90 text-white shadow-divine'
+                      }`}
+                      size="lg"
+                    >
+                      {loading && loadingRoute === plan.name ? (
+                        <div className="flex items-center gap-2">
+                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                          Loading...
+                        </div>
+                      ) : (
+                        plan.cta
+                      )}
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Bottom CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <p className="text-gray-600 mb-4">
+              All plans start with our comprehensive co-parenting questionnaire
+            </p>
+            <a 
+              href="/pricing" 
+              className="inline-flex items-center gap-2 text-church-gold hover:text-church-navy font-semibold transition-colors duration-300 group"
+            >
+              See detailed pricing comparison
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </a>
+          </motion.div>
+        </div>
+      </section>
+    </>
   );
 };
 
