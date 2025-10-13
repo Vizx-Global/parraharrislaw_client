@@ -74,12 +74,8 @@ const AttorneysSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="flex items-center justify-center mb-4">
-            <Languages className="w-6 h-6 text-church-gold mr-2" />
-            <span className="text-church-gold font-semibold">Bilingual Legal Team</span>
-          </div>
            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-church-navy mb-4 leading-tight">
-             Bilingual Jacksonville Family Law Attorneys & Divorce Lawyers
+             Meet Our Attorneys
            </h2>
           <p className="text-xl leading-relaxed font-light mx-auto">
             Meet our dedicated team of experienced family law professionals committed to protecting your family's future with compassion and expertise.

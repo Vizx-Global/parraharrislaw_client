@@ -1,318 +1,456 @@
-import React, { useState } from "react";
-import Header from "@/components/Header";
-import teamPhoto from "@/assets/LandlordHero.jpg"; // placeholder team image
+import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { 
+  Heart,
+  Target,
+  Users,
+  Shield,
+  Award,
+  Star,
+  ArrowRight,
+  Quote,
+  Calendar,
+  FileText,
+  CheckCircle2,
+  Globe,
+  Clock,
+  Zap
+} from "lucide-react";
+import teamImage from "@/assets/family.jpg";
+import missionImage from "@/assets/Consultation.jpg";
+import valuesImage from "@/assets/Strategy.jpg";
+import Header from "@/components/HeaderTwo";
 import Footer from "@/components/Footer";
 
+const AboutUs = () => {
+  const stats = [
+    { number: "500+", label: "Families Helped", icon: Users },
+    { number: "100%", label: "Court Acceptance", icon: CheckCircle2 },
+    { number: "98%", label: "Client Satisfaction", icon: Star },
+    { number: "15+", label: "Years Experience", icon: Clock }
+  ];
 
-import aboutVideo from "@/assets/about-video.mp4"; // <-- rename to your actual file
-// (optional) a still frame poster image
-// import videoPoster from "@/assets/about-us-poster.jpg";
-
-// ---- Inline styles: keep CTA micro-interactions only (no card float) ----
-const Styles = () => (
-  <style>{`
-    .cta-btn {
-      transition: transform 120ms ease, box-shadow 200ms ease, filter 200ms ease;
+  const values = [
+    {
+      icon: Heart,
+      title: "Compassion First",
+      description: "We understand that co-parenting is emotional. Our approach prioritizes your family's wellbeing above all else.",
+      color: "from-pink-500 to-rose-500"
+    },
+    {
+      icon: Shield,
+      title: "Legal Excellence",
+      description: "Every document is crafted to meet Florida's legal standards, backed by experienced family law attorneys.",
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      icon: Zap,
+      title: "Innovation",
+      description: "We've revolutionized family law by making it accessible, affordable, and stress-free for Florida families.",
+      color: "from-amber-500 to-orange-500"
+    },
+    {
+      icon: Target,
+      title: "Results-Driven",
+      description: "We measure success by your family's peaceful transition and the court's acceptance of your parenting plan.",
+      color: "from-emerald-500 to-green-500"
     }
-    .cta-btn:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.05);
-      box-shadow: 0 8px 20px rgba(99,102,241,.25);
+  ];
+
+  const team = [
+    {
+      name: "Paola Parra Harris, Esq.",
+      role: "Founder & Managing Attorney",
+      bio: "With over 25 years of family law experience, Paola founded CoParent Florida to make legal services accessible to all families.",
+      expertise: ["Family Law", "Mediation", "Bilingual Services"],
+      image: "paola-image"
+    },
+    {
+      name: "Legal Technology Team",
+      role: "Platform Development",
+      bio: "Our tech team ensures the platform is intuitive, secure, and always available when you need it.",
+      expertise: ["Legal Tech", "Security", "User Experience"],
+      image: "tech-team"
+    },
+    {
+      name: "Support Specialists",
+      role: "Client Success",
+      bio: "Dedicated professionals ready to guide you through every step of creating your parenting plan.",
+      expertise: ["Client Support", "Document Guidance", "Court Procedures"],
+      image: "support-team"
     }
-    .cta-btn:active {
-      transform: translateY(0);
-      filter: brightness(0.98);
-      box-shadow: 0 4px 12px rgba(99,102,241,.18);
+  ];
+
+  const milestones = [
+    { year: "2008", event: "Founded with vision to democratize family law" },
+    { year: "2015", event: "Launched first digital parenting plan platform" },
+    { year: "2020", event: "Helped 500+ Florida families" },
+    { year: "2024", event: "Expanded to full-service co-parenting solutions" }
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
     }
-  `}</style>
-);
+  };
 
-type MissionItem = { title: string; body: string };
-
-const missionValues: MissionItem[] = [
-  {
-    title: "COMPETENCE",
-    body:
-      "With over 50 years of cumulative experience in the legal field in Jacksonville, we understand that what is at stake is the most important issue in the world of our clients, which is why every member of our team pitches in to work on your case. We have the skill and resources to handle all aspects of your litigation.",
-  },
-  {
-    title: "COMPASSION",
-    body:
-      "We are advocates for the welfare of the families we serve. We are committed to giving our clients the attention and dedication they need to succeed through those uncertain times in their lives. Our experience will help guide and support you and your family through the legal process and beyond.",
-  },
-  {
-    title: "POSITIVE RESULTS",
-    body:
-      "Our attorneys are committed to providing the citizens of Jacksonville and surrounding areas with superior legal representation. Our record of successful results and our clients’ testimonials offer proof of our history of providing excellent representation and legal services to our clients.",
-  },
-];
-
-const AboutUs: React.FC = () => {
-  const [open, setOpen] = useState(false);
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gray-300">
+    <div className="min-h-screen bg-gradient-to-b from-church-cream to-white">
       <Header />
-      <main className="relative mx-auto max-w-7xl px-4 pb-20 pt-28 md:px-6 md:pt-32">
-        <Styles />
+      
+      {/* Hero Section */}
+      <section className="relative py-20 bg-gradient-divine overflow-hidden">
+        <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-church-navy px-4 py-2 rounded-full mb-6"
+            >
+              <Heart className="w-4 h-4" />
+              <span className="text-sm font-semibold text-church-gold">Our Story</span>
+            </motion.div>
 
-        {/* HERO */}
-        <header className="mb-10">
-          <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
-            About Us
-          </h1>
-        </header>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-church-navy mb-6 leading-tight"
+            >
+              Building <span className="text-church-gold">Better Futures</span> for Florida Families
+            </motion.h1>
 
-        {/* INTRO */}
-        <section className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          <div className="prose max-w-none">
-            <h2 className="text-lg font-semibold tracking-wide text-neutral-700">
-              Jacksonville Family &amp; Divorce Lawyers
-            </h2>
-            <p>
-              At a time when you most need a strong advocate, Parra Harris Law
-              provides a partner who is experienced, competent and caring on your
-              side. Based in Jacksonville and serving all of Northeast Florida, we
-              help clients who are going through a divorce, annulment or legal
-              separation; are concerned about child support, custody or visitation
-              issues; or are dealing with issues such as asset division, order
-              enforcement, abuse, and other areas of family law. We have a strong
-              track record of success for our clients across the full gamut of
-              family law practice areas and were named one of 2023’s “Best Divorce
-              Lawyers in Jacksonville” by Expertise.
-            </p>
-            <p>
-              Our firm is led by Paola Parra Harris, who brings over two decades
-              of divorce and family law experience to her clients. Paola and her
-              accomplished legal team help couples resolve complex divorce issues,
-              and strive to do so in caring, compassionate ways that mitigate
-              stress and protect the most important things. No matter the
-              challenge, our goal is to protect your rights and ensure an optimal
-              outcome.
-            </p>
-          </div>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="text-xl text-church-navy font-light mb-8 max-w-3xl mx-auto leading-relaxed"
+            >
+              We're revolutionizing family law by making it accessible, affordable, and compassionate. 
+              Our mission is to help separated parents create peaceful co-parenting arrangements that put children first.
+            </motion.p>
+          </motion.div>
+        </div>
+        
+        {/* Decorative Elements */}
+        <div className="absolute top-10 left-10 w-20 h-20 bg-church-gold rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-10 right-10 w-16 h-16 bg-church-light-blue rounded-full opacity-30"></div>
+      </section>
 
-          {/* Team photo – clickable to Attorneys; also opens lightbox */}
-          <div>
-            <a href="/attorneys" className="block group">
-              <img
-                src={teamPhoto}
-                alt="Parra Harris Law team"
-                className="w-full rounded-xl shadow-md transition-transform duration-300 group-hover:scale-[1.01]"
-                onClick={(e) => {
-                  if (e.metaKey || e.ctrlKey) return; // allow new-tab
-                  e.preventDefault();
-                  setOpen(true);
-                }}
-              />
-            </a>
+      {/* Mission & Story */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7 }}
+              viewport={{ once: true }}
+            >
+              <div className="inline-flex items-center gap-2 bg-gradient-divine text-church-navy px-4 py-2 rounded-full mb-6">
+                <Target className="w-4 h-4" />
+                <span className="text-sm font-semibold">Our Mission</span>
+              </div>
+              
+              <h2 className="text-3xl md:text-4xl font-bold text-church-navy mb-6">
+                Transforming Family Law for the Better
+              </h2>
+              
+              <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+                <p>
+                  Founded by experienced family law attorney Paola Parra Harris, CoParent Florida was born from 
+                  a simple observation: traditional legal services were too expensive, too slow, and too stressful 
+                  for families navigating separation.
+                </p>
+                <p>
+                  We set out to change that by creating a platform that combines legal expertise with modern technology, 
+                  making court-ready parenting plans accessible to every Florida family.
+                </p>
+                <p>
+                  Today, we've helped hundreds of parents create peaceful co-parenting arrangements that prioritize 
+                  children's wellbeing while ensuring legal compliance.
+                </p>
+              </div>
 
-            {open && (
-              <div
-                className="fixed inset-0 z-50 bg-black/70 p-6"
-                onClick={() => setOpen(false)}
-                role="dialog"
-                aria-modal="true"
-              >
-                <img
-                  src={teamPhoto}
-                  alt="Parra Harris Law team"
-                  className="mx-auto max-h-full rounded-xl shadow-2xl"
+              <div className="flex flex-col sm:flex-row gap-4 mt-8">
+                <Button className="church-button">
+                  Meet Our Team
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+                <Button variant="outline" className="church-button-outline">
+                  <FileText className="w-4 h-4 mr-2" />
+                  Our Approach
+                </Button>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="rounded-2xl overflow-hidden shadow-soft">
+                <img 
+                  src={missionImage} 
+                  alt="Our mission to help families"
+                  className="w-full h-auto object-cover"
                 />
               </div>
-            )}
+              <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-church-gold rounded-2xl opacity-20"></div>
+            </motion.div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* VIDEO — responsive HTML5 player using your MP4 */}
-<section className="mt-12">
-  <div className="relative w-full overflow-hidden rounded-xl shadow-md">
-    {/* 16:9 aspect ratio spacer */}
-    <div className="pt-[56.25%]" />
-    <video
-      className="absolute left-0 top-0 h-full w-full"
-      src={aboutVideo}                 // direct src fallback
-      controls
-      playsInline
-      preload="metadata"
-      // poster={videoPoster}           // optional poster
-    >
-      <source src={aboutVideo} type="video/mp4" />  {/* <-- fixed MIME type */}
-      Your browser does not support the video tag.
-    </video>
-  </div>
-</section>
+      {/* Stats Section */}
+      <section className="py-16 bg-gradient-to-b from-church-cream to-white">
+        <div className="container mx-auto px-6 lg:px-12">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8"
+          >
+            {stats.map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                variants={itemVariants}
+                className="text-center"
+              >
+                <Card className="church-card border-0 shadow-soft hover:shadow-divine transition-all duration-300">
+                  <CardContent className="p-6">
+                    <div className="w-12 h-12 bg-gradient-to-br from-church-gold to-secondary-light rounded-xl flex items-center justify-center text-white shadow-golden mx-auto mb-4">
+                      <stat.icon className="w-6 h-6" />
+                    </div>
+                    <div className="text-2xl md:text-3xl font-bold text-church-navy mb-2">
+                      {stat.number}
+                    </div>
+                    <div className="text-sm text-muted-foreground font-medium">
+                      {stat.label}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
 
+      {/* Values Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6 lg:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <div className="inline-flex items-center gap-2 bg-gradient-divine text-church-navy px-4 py-2 rounded-full mb-4">
+              <Award className="w-4 h-4" />
+              <span className="text-sm font-semibold">Our Values</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-church-navy mb-4">
+              What Guides Everything We Do
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              These core principles shape every interaction, every document, and every feature of our platform.
+            </p>
+          </motion.div>
 
-        {/* MISSION & VALUES — static cards, thin gradient border on hover */}
-        <section className="mt-16">
-          <h3 className="mb-2 text-center text-sm font-semibold uppercase tracking-widest text-neutral-500">
-            Mission &amp; Values
-          </h3>
-          <p className="mx-auto mb-8 max-w-3xl text-center text-neutral-700">
-            We exist to help our clients successfully navigate the sensitive and
-            complex legal issues involved in all areas of divorce and family law,
-            providing expert legal guidance, strong advocacy and compassion while
-            representing their best interests.
-          </p>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3 ">
-            {missionValues.map((item) => (
-              <div key={item.title} className="relative group">
-                {/* Thin gradient border like CTA: visible on hover */}
-                <div className="pointer-events-none absolute inset-0 -z-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  <div className="h-full w-full rounded-2xl bg-gradient-to-br from-indigo-600 via-sky-500 to-emerald-500 p-[2px]">
-                    <div className="h-full w-full rounded-[1rem] bg-transparent" />
-                  </div>
-                </div>
-
-                <article className="relative z-10 overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition hover:shadow-md">
-                  <h4 className="mb-3 text-center text-base font-semibold tracking-wide">
-                    {item.title}
-                  </h4>
-                  <p className="text-sm leading-relaxed text-neutral-700">
-                    {item.body}
-                  </p>
-                </article>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {values.map((value, index) => (
+              <motion.div
+                key={value.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Card className="church-card border-0 shadow-soft hover:shadow-divine transition-all duration-300 h-full">
+                  <CardContent className="p-6 text-center">
+                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br ${value.color} text-white shadow-md mx-auto mb-4`}>
+                      <value.icon className="w-8 h-8" />
+                    </div>
+                    <h3 className="text-xl font-bold text-church-navy mb-3">
+                      {value.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {value.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* REQUEST A CONSULTATION (enhanced CTA) */}
-        <section className="mt-16">
-          <h3 className="mb-6 text-xl font-semibold">Request a Consultation</h3>
-
-          {/* Gradient wrapper with glassy inner panel */}
-          <div className="rounded-3xl bg-gradient-to-br from-indigo-600 via-sky-500 to-emerald-500 p-[2px] shadow-lg">
-            <div className="rounded-3xl bg-white/85 p-6 backdrop-blur-sm md:p-8">
-              <form
-                className="grid grid-cols-1 gap-4"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  alert("Thank you! We’ll be in touch soon.");
-                }}
-              >
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                  <div>
-                    <label htmlFor="firstName" className="mb-1 block text-sm font-medium">
-                      First Name *
-                    </label>
-                    <input
-                      id="firstName"
-                      name="firstName"
-                      required
-                      className="w-full rounded-lg border border-neutral-300 px-3 py-2"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="lastName" className="mb-1 block text-sm font-medium">
-                      Last Name *
-                    </label>
-                    <input
-                      id="lastName"
-                      name="lastName"
-                      required
-                      className="w-full rounded-lg border border-neutral-300 px-3 py-2"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                  <div>
-                    <label htmlFor="phone" className="mb-1 block text-sm font-medium">
-                      Phone *
-                    </label>
-                    <input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      required
-                      className="w-full rounded-lg border border-neutral-300 px-3 py-2"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="mb-1 block text-sm font-medium">
-                      Email *
-                    </label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      className="w-full rounded-lg border border-neutral-300 px-3 py-2"
-                    />
-                  </div>
-                </div>
-
-                <fieldset className="space-y-2">
-                  <legend className="mb-1 text-sm font-medium">Contact Preference *</legend>
-                  <div className="flex flex-wrap gap-4">
-                    {["Call", "Text", "Email"].map((opt) => (
-                      <label key={opt} className="flex items-center gap-2">
-                        <input required type="radio" name="contactPref" value={opt} />
-                        <span>{opt}</span>
-                      </label>
-                    ))}
-                  </div>
-                </fieldset>
-
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                  <div>
-                    <label htmlFor="timePref" className="mb-1 block text-sm font-medium">
-                      Preferred day/time
-                    </label>
-                    <input
-                      id="timePref"
-                      name="timePref"
-                      className="w-full rounded-lg border border-neutral-300 px-3 py-2"
-                      placeholder="e.g., Monday mornings"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="referral" className="mb-1 block text-sm font-medium">
-                      How did you hear about us?
-                    </label>
-                    <input
-                      id="referral"
-                      name="referral"
-                      className="w-full rounded-lg border border-neutral-300 px-3 py-2"
-                      placeholder="Google, friend, etc."
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="mb-1 block text-sm font-medium">
-                    Your Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    className="w-full rounded-lg border border-neutral-300 px-3 py-2"
-                  />
-                </div>
-
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    className="cta-btn inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-indigo-600 via-sky-500 to-emerald-500 
-                               px-6 py-3 text-white shadow-md focus:outline-none focus:ring-4 focus:ring-indigo-300"
-                  >
-                    Submit
-                  </button>
-                </div>
-              </form>
-
-              <p className="mt-3 text-xs text-neutral-600">
-                By submitting this form, you agree that contacting us does not create an attorney-client relationship.
-                Please do not send confidential information until an engagement is established.
-              </p>
+      {/* Team Section */}
+      <section className="py-16 bg-gradient-to-b from-church-cream to-white">
+        <div className="container mx-auto px-6 lg:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <div className="inline-flex items-center gap-2 bg-gradient-divine text-church-navy px-4 py-2 rounded-full mb-4">
+              <Users className="w-4 h-4" />
+              <span className="text-sm font-semibold">Our Team</span>
             </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-church-navy mb-4">
+              The People Behind Your Success
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              A dedicated team of legal experts and technology professionals working together for your family.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {team.map((member, index) => (
+              <motion.div
+                key={member.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Card className="church-card border-0 shadow-soft hover:shadow-divine transition-all duration-300 h-full">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-20 h-20 bg-gradient-to-br from-church-gold to-secondary-light rounded-2xl flex items-center justify-center text-white shadow-golden mx-auto mb-4">
+                      <Users className="w-10 h-10" />
+                    </div>
+                    <h3 className="text-xl font-bold text-church-navy mb-2">
+                      {member.name}
+                    </h3>
+                    <p className="text-church-gold font-semibold text-sm mb-3">
+                      {member.role}
+                    </p>
+                    <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                      {member.bio}
+                    </p>
+                    <div className="flex flex-wrap gap-2 justify-center">
+                      {member.expertise.map((skill, skillIndex) => (
+                        <span
+                          key={skillIndex}
+                          className="bg-church-light-blue text-church-navy px-2 py-1 rounded-full text-xs"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
+
+      {/* Story Timeline */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6 lg:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <div className="inline-flex items-center gap-2 bg-gradient-divine text-church-navy px-4 py-2 rounded-full mb-4">
+              <Globe className="w-4 h-4" />
+              <span className="text-sm font-semibold">Our Journey</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-church-navy mb-4">
+              Building a Better Future
+            </h2>
+          </motion.div>
+
+          <div className="max-w-4xl mx-auto">
+            {milestones.map((milestone, index) => (
+              <motion.div
+                key={milestone.year}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true }}
+                className={`flex items-center mb-8 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
+              >
+                <div className="flex-1 text-center">
+                  <div className="bg-gradient-divine rounded-2xl p-6 shadow-soft">
+                    <div className="text-2xl font-bold text-church-gold mb-2">
+                      {milestone.year}
+                    </div>
+                    <p className="text-church-navy">
+                      {milestone.event}
+                    </p>
+                  </div>
+                </div>
+                <div className="w-4 h-4 bg-church-gold rounded-full mx-8"></div>
+                <div className="flex-1"></div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-16 bg-gradient-to-r from-church-navy to-church-light-blue">
+        <div className="container mx-auto px-6 lg:px-12 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Ready to Start Your Co-Parenting Journey?
+            </h2>
+            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+              Join the hundreds of Florida families who have found peace and clarity through our platform.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button className="bg-church-gold hover:bg-church-gold/90 text-church-navy text-lg font-semibold py-4 px-8">
+                Start Your Parenting Plan
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+              <Button variant="outline" className="border-white text-church-navy hover:bg-white hover:text-church-navy text-lg font-semibold py-4 px-8">
+                <Calendar className="w-5 h-5 mr-2 text-church-gold" />
+                Free Consultation
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );

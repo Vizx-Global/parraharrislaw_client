@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, FileCheck, Clock, Star } from "lucide-react";
-import heroBackground from "@/assets/LandlordHero.jpg";
+import heroBackground from "@/assets/HeroTrial.jpg";
 import expertise2021 from "@/assets/Expertise2021.png";
 import phlAward from "@/assets/LegalAbility.png";
 import avoRatingBadge from "@/assets/Avo Rating.png";

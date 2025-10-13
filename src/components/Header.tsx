@@ -30,11 +30,11 @@ const Header = () => {
 
   const navItems = [
     { label: "Home", href: "/" },
-    { label: "Practice Areas", href: "#practice-areas" },
-    { label: "Attorneys", href: "/attorneys" },
     { label: "About Us", href: "/about" },
-    { label: "Resources", href: "#resources" },
-    { label: "Blog", href: "#blog" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "How it Works", href: "/how-we-work" },
+    { label: "Attoneys", href: "/attorneys" },
+    { label: "Contact", href: "/contact" },
   ];
 
   const handleNavClick = (href: string) => {
@@ -125,7 +125,7 @@ const Header = () => {
                   : "bg-gradient-to-r from-church-gold to-amber-500 hover:from-amber-500 hover:to-church-gold text-white shadow-lg border border-white/20"
               }`}
             >
-              Sign Up
+              Get Started
             </Button>
           </div>
 

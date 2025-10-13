@@ -14,6 +14,8 @@ import SignUpForm from "@/pages/Authentication/Registration";
 import SignIn from "@/pages/Authentication/Login";
 import DIY from "@/pages/Questionnaires/DIYPlan/InteractiveCoParentingQuestionnaire";
 import AdvancedPlan from "@/pages/Questionnaires/AdvancedPlan/AdvancedCoParentingQuestionnaire";
+import HowWeWork from "./pages/HowWeWork";
+import Pricing from "./pages/Pricing";
 
 
 const queryClient = new QueryClient();
@@ -32,8 +34,10 @@ const App = () => (
           <Route path="/advance-plan" element={<AdvancedPlan />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/attorneys" element={<Attorneys />} />
+          <Route path="/how-we-work" element={<HowWeWork />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/pricing" element={<Pricing />} />
 
         </Routes>
       </BrowserRouter>

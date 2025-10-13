@@ -8,14 +8,13 @@ import logo from "@/assets/Parra_Harris-Final.png";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
-
-  const navItems = [
+    const navItems = [
     { label: "Home", href: "/" },
-    { label: "Practice Areas", href: "#practice-areas" },
-    { label: "Attorneys", href: "#attorneys" },
-    { label: "About Us", href: "#about" },
-    { label: "Resources", href: "#resources" },
-    { label: "Blog", href: "#blog" },
+    { label: "About Us", href: "/about" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "How it Works", href: "/how-we-work" },
+    { label: "Attoneys", href: "/attorneys" },
+    { label: "Contact", href: "/contact" },
   ];
 
   const handleNavClick = (href: string) => {

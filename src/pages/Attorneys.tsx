@@ -1,312 +1,369 @@
-// src/pages/Attorneys.tsx
-import { useMemo, useState } from "react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
+import { useNavigate } from 'react-router-dom';
+import { ArrowRight, Award, Languages, Star, Calendar, Shield, Users, Scale, Heart } from "lucide-react";
+import PaolaImage from "@/assets/PaolaParra.png";
+import LynnImage from "@/assets/Lynn.png";
+import JohnImage from "@/assets/John.png";
+import PJImage from "@/assets/Priscilla.png";
+import Header from "@/components/HeaderTwo";
+import Footer from "@/components/Footer";
 
-// ✅ If you store images in /src/assets/attorneys/* keep these imports.
-//    (Recommended with Vite — avoids path issues)
-import paolaImg from "@/assets/attorneys/paola.jpg";
-import lynImg from "@/assets/attorneys/lyn-salvatore.jpg";
-import johnImg from "@/assets/attorneys/john-joseph-clark.jpg";
-import pjImg from "@/assets/attorneys/priscilla-justiniano.jpg";
+const AttorneysSection = () => {
+  const attorneys = {
+    featured: {
+      name: "Paola Parra Harris, Esquire",
+      title: "Managing Partner",
+      image: PaolaImage,
+      bio: "Mrs. Parra Harris is fully bilingual and a large percentage of her clientele are Spanish speaking only. She has been practicing family trial law since 1998 after practicing insurance defense litigation in Atlanta, Georgia since 1996 and later in Jacksonville.",
+      specialties: ["Florida Family Law Inns of Court – Barrister", "Leadership Florida – NE Region Council", "Sulzbacher Center – Board of Directors", "Jacksonville Bar Association – Naturalization Committee", "Jax Icemen – Community Partner and Women in Business Sponsor"],
+      link: "https://parraharrislaw.com/attorney-paola-parra-harris/"
+    },
+    team: [
+      {
+        name: "Lynn Salvatore, Esquire",
+        title: "Senior Associate",
+        image: LynnImage,
+        bio: "Specializing in high-conflict divorce and asset division with a focus on protecting client interests through meticulous legal strategy and negotiation.",
+        link: "https://parraharrislaw.com/lynn-salvatore-esquire/"
+      },
+      {
+        name: "John Joseph Clark, Esquire",
+        title: "Senior Associate",
+        image: JohnImage,
+        bio: "Experienced in family mediation and collaborative law with a track record of achieving favorable settlements while minimizing courtroom conflict.",
+        link: "https://parraharrislaw.com/john-joseph-clark/"
+      },
+      {
+        name: "Priscilla 'PJ' Justianno, Esquire",
+        title: "Associate Attorney",
+        image: PJImage,
+        bio: "Dedicated to child advocacy and support matters, bringing fresh perspective and vigorous representation to protect families' futures.",
+        link: "https://parraharrislaw.com/priscilla-pj-justiniano-esquire-lcdr-usn-ret/"
+      }
+    ]
+  };
 
-// ---------------- Types ----------------
-type Section = { label: string; items: string[] };
-type Attorney = {
-  name: string;
-  role: string;
-  image: string;
-  href: string; // full bio URL
-  blurb: string;
-  focus?: string[];
-  education?: string[];
-  admissions?: string[];
-  leadership?: string[];
-  community?: string[];
-  contact?: { phone?: string; email?: string };
+  const practiceAreas = [
+    {
+      icon: Scale,
+      title: "Divorce & Separation",
+      description: "Comprehensive legal support for divorce proceedings and separation agreements"
+    },
+    {
+      icon: Users,
+      title: "Child Custody",
+      description: "Protecting your children's best interests in custody arrangements"
+    },
+    {
+      icon: Shield,
+      title: "Domestic Violence",
+      description: "Immediate protection and legal recourse for domestic violence victims"
+    },
+    {
+      icon: Heart,
+      title: "Adoption",
+      description: "Guiding families through the adoption process with care and expertise"
+    }
+  ];
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const handleLearnMore = (url) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+  const navigate = useNavigate();
+
+const handleScheduleConsultation = () => {
+  navigate('/contact');
 };
-
-// ---------------- Data (condensed from your captures) ----------------
-const ATTORNEYS: Attorney[] = [
-  {
-    name: "Paola Parra Harris",
-    role: "Founder & Managing Attorney",
-    image: paolaImg,
-    href: "Attorneys#",
-    blurb:
-      "Practicing family law since 1998, Paola is bilingual and represents diverse clients in complex family law matters. Recognized as Ultimate Family Law Attorney, Woman of Distinction, and Lawyer of the Year.",
-    focus: ["Divorce", "Child Custody & Time-Sharing", "Support & Alimony", "High-asset matters"],
-    education: [
-      "J.D., Walter F. George School of Law (Mercer University)",
-      "B.A., English Literature — University of Florida",
-    ],
-    leadership: [
-      "Founding President, Hispanic Bar Association of Northeast Florida",
-      "Leadership Florida – NE Region Council",
-      "Catholic Charities of Jacksonville – Board / Chair",
-      "Jacksonville Bar Association – Naturalization Committee (Moderator)",
-    ],
-    community: [
-      "Up & Comer honoree; Woman Lawyer of the Year (JWLA)",
-      "Recognized by Jacksonville Business Journal & Hola Latino magazine",
-    ],
-    contact: { phone: "(904) 900-1617", email: "paola@parraharrislaw.com" },
-  },
-  {
-    name: "Lynn Salvatore",
-    role: "Senior Associate",
-    image: lynImg,
-    href: "Attorneys#",
-    blurb:
-      "Entrepreneurial and masterful. Background with Florida Department of Children & Families and Florida Guardian Ad Litem Program. Certified Civil Circuit Mediator for the Supreme Court of Florida.",
-    focus: [
-      "Equitable Distribution",
-      "Child Custody",
-      "Post-Judgment Modifications",
-      "Collaborative Family Law",
-    ],
-    education: [
-      "J.D., University of Florida Levin College of Law (1999)",
-      "B.S., Business Administration",
-    ],
-    leadership: [
-      "Jacksonville Bar Association",
-      "Jacksonville Women Lawyers Association",
-      "Martindale-Hubbell AV Preeminent® rated",
-      "Jax Bar Podcast – featured guest",
-    ],
-    community: [
-      "Women Empowered Award (Jacksonville Magazine) 2022 & 2023",
-      "Expert witness in Middle District of Florida (GAL matters)",
-    ],
-    contact: { phone: "(904) 900-1617", email: "lynn@parraharrislaw.com" },
-  },
-  {
-    name: "John Joseph Clark",
-    role: "Attorney",
-    image: johnImg,
-    href: "Attorneys#",
-    blurb:
-      "Fluent in Spanish; reputation for meticulous preparation and client communication. Diverse litigation background; clear strategy from intake to trial prep.",
-    focus: ["Divorce", "Support", "Litigation"],
-    admissions: [
-      "Florida (2001)",
-      "U.S. District Court, Southern District of Florida (2006)",
-    ],
-    education: [
-      "J.D., University of Miami School of Law, cum laude (2000)",
-      "B.A., Political Science — Florida International University (1997)",
-    ],
-    leadership: [
-      "Phi Delta Phi (Intl. legal honor society)",
-      "Hispanic Law Student Association",
-      "Criminal Law Society",
-    ],
-    contact: { phone: "(904) 900-1617", email: "john@parraharrislaw.com" },
-  },
-  {
-    name: 'Priscilla "PJ" Justiniano',
-    role: "Of Counsel",
-    image: pjImg,
-    href: "Attorneys#",
-    blurb:
-      "U.S. Navy LCDR (Ret.). Served in submarine commands and as Naval Special Warfare command support. Led Florida Coalition for Domestic Violence’s Injunction for Protection Project.",
-    focus: ["Family Law", "Domestic Violence Injunctions", "Juvenile Courts", "Veterans"],
-    education: ["J.D., Stetson University College of Law (per profile context)"],
-    community: [
-      "Advocacy for domestic violence survivors",
-      "Service to the Hispanic community on the First Coast",
-    ],
-    contact: { phone: "(904) 900-1617", email: "pj@parraharrislaw.com" },
-  },
-];
-
-// ---------------- Small helpers ----------------
-const toSections = (a: Attorney): Section[] =>
-  [
-    a.focus && a.focus.length ? { label: "Focus Areas", items: a.focus } : null,
-    a.education && a.education.length ? { label: "Education", items: a.education } : null,
-    a.admissions && a.admissions.length ? { label: "Admissions", items: a.admissions } : null,
-    a.leadership && a.leadership.length ? { label: "Leadership & Recognition", items: a.leadership } : null,
-    a.community && a.community.length ? { label: "Community", items: a.community } : null,
-  ].filter(Boolean) as Section[];
-
-// ---------------- UI ----------------
-const Attorneys = () => {
-  const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState<Attorney | null>(null);
-
-  const sections = useMemo(() => (selected ? toSections(selected) : []), [selected]);
-
   return (
-    <div className="min-h-screen bg-gray-300">
+    <>
       <Header />
-
-      {/* keep content under the fixed header */}
-      <main className="max-w-6xl mx-auto px-4 pt-28 md:pt-36 pb-16">
-        <section className="mb-6">
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
-            Jacksonville Family Law Attorneys
-          </h1>
-        </section>
-
-        <section className="mb-10">
-          <p className="text-muted-foreground leading-7">
-            At Parra Harris Law, we have a proven track record of success. Our Jacksonville Family
-            Law Attorneys focus exclusively on divorce and family law and work diligently on your
-            behalf in all matters of divorce, property division, child custody and visitation, and
-            other matters. The firm is led by award-winning attorney, Paola Parra Harris—recognized
-            as Ultimate CEO, Ultimate Family Law Attorney, Woman of Distinction, and Lawyer of the Year.
-          </p>
-        </section>
-
-        {/* Grid */}
-        <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {ATTORNEYS.map((a) => (
-            <Card
-              key={a.name}
-              className="group overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-300 hover:shadow-md"
+      {/* Hero Section */}
+      <section className="relative py-20 bg-gradient-divine  overflow-hidden">
+        <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center"
+          >
+            <h1 className="text-3xl md:text-4xl text-church-navy font-bold mb-6 mt-4 leading-tight">
+              Meet Our <span className="text-church-gold">Legal Team</span>
+            </h1>
+            <p className="text-sm md:text-xl text-church-navy font-light mb-8 max-w-3xl mx-auto leading-relaxed">
+              Experienced family law attorneys dedicated to protecting your family's future with compassion and expertise.
+            </p>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <button
-                type="button"
-                onClick={() => {
-                  setSelected(a);
-                  setOpen(true);
-                }}
-                className="block w-full text-left"
-                aria-label={`Open bio for ${a.name}`}
+              <Button 
+                className="church-button bg-church-gold hover:bg-church-gold/90 text-church-navy text-lg py-3 px-8"
+                onClick={handleScheduleConsultation}
               >
-                <div className="aspect-[3/4] w-full overflow-hidden">
-                  <img
-                    src={a.image}
-                    alt={`${a.name} – ${a.role}`}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    loading="lazy"
-                  />
-                </div>
-              </button>
-
-              <CardContent className="pt-4">
-                <div className="flex items-start justify-between gap-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSelected(a);
-                      setOpen(true);
-                    }}
-                    className="text-left"
-                  >
-                    <h3 className="font-semibold leading-tight hover:underline">{a.name}</h3>
-                    <p className="text-sm text-muted-foreground">{a.role}</p>
-                  </button>
-                  <a
-                    href={a.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-primary hover:underline whitespace-nowrap mt-1"
-                  >
-                    Full Bio ↗
-                  </a>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </section>
-      </main>
-      
-
-      {/* Spotlight Modal */}
-      <Dialog open={open} onOpenChange={setOpen}>
-  {/* Wider + shorter on laptops, keep header visible */}
-  <DialogContent className="max-w-4xl p-0 md:max-h-[90vh] overflow-hidden">
-    {selected && (
-      <>
-        {/* Sticky header */}
-        <DialogHeader className="sticky top-0 z-10 bg-white/95 backdrop-blur border-b px-6 py-4">
-          <DialogTitle className="text-[20px] md:text-2xl">{selected.name}</DialogTitle>
-          <DialogDescription className="text-[13px] md:text-sm text-muted-foreground">
-            {selected.role}
-          </DialogDescription>
-        </DialogHeader>
-
-        {/* Scrollable body */}
-        <div className="overflow-y-auto h-full px-6 py-5 md:max-h-[calc(80vh-72px)]">
-          <div className="grid gap-6 md:grid-cols-[260px,1fr]">
-            {/* Left: image + contact (constrained height) */}
-            <div className="md:pr-2">
-              <img
-                src={selected.image}
-                alt={selected.name}
-                className="w-full max-h-64 object-cover rounded-xl shadow"
-              />
-              <div className="mt-3 space-y-1 text-[13px] leading-5">
-                {selected.contact?.phone && (
-                  <div>
-                    <span className="text-muted-foreground">Phone:</span>{" "}
-                    <a className="underline" href={`tel:+1${selected.contact.phone.replace(/\D/g, "")}`}>
-                      {selected.contact.phone}
-                    </a>
-                  </div>
-                )}
-                {selected.contact?.email && (
-                  <div>
-                    <span className="text-muted-foreground">Email:</span>{" "}
-                    <a className="underline" href={`mailto:${selected.contact.email}`}>
-                      {selected.contact.email}
-                    </a>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Right: condensed text + dense sections */}
-            <div className="md:pl-2">
-              <p className="text-[15px] leading-6">{selected.blurb}</p>
-
-              {/* Two-column sections on laptop to cut vertical height */}
-              <div className="mt-5 grid gap-x-8 gap-y-5 md:grid-cols-2">
-                {sections.map((s) => (
-                  <div key={s.label}>
-                    <h4 className="text-[12px] font-semibold tracking-wide uppercase text-muted-foreground">
-                      {s.label}
-                    </h4>
-                    <ul className="mt-2 list-disc pl-5 text-[13px] leading-6 space-y-1">
-                      {s.items.map((it, i) => (
-                        <li key={i}>{it}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-6 flex flex-wrap gap-3">
-                <a href={selected.href} target="_blank" rel="noopener noreferrer">
-                  <Button variant="secondary" className="h-9 px-4 text-[13px]">Read Full Bio</Button>
-                </a>
-                <a href="/contact">
-                  <Button className="h-9 px-4 text-[13px]">Schedule a Consultation</Button>
-                </a>
-              </div>
-            </div>
-          </div>
+                <Calendar className="w-5 h-5 mr-2" />
+                Schedule Free Consultation
+              </Button>
+            </motion.div>
+          </motion.div>
         </div>
-      </>
-    )}
-  </DialogContent>
-</Dialog>
-<Footer />
-    </div>
-    
+        
+        {/* Decorative Elements */}
+        <div className="absolute top-10 left-10 w-20 h-20 bg-church-navy rounded-full animate-pulse"></div>
+        <div className="absolute bottom-10 right-10 w-16 h-16 bg-church-church-navy rounded-full "></div>
+        <div className="absolute top-1/2 left-1/4 w-12 h-12 bg-church-gold rounded-full opacity-25"></div>
+      </section>
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6 lg:px-12">
+          {/* Featured Attorney - Paola Parra Harris */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+            className="mb-20"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {/* Content */}
+              <div className="order-2 lg:order-1">
+                <div className="flex items-center mb-4">
+                  <Award className="w-6 h-6 text-church-gold mr-2" />
+                  <span className="text-sm font-semibold text-church-gold uppercase tracking-wide">Managing Partner</span>
+                </div>
+                
+                <h3 className="text-3xl md:text-4xl font-bold text-church-navy mb-4">
+                  {attorneys.featured.name}
+                </h3>
+
+                <p className="text-lg leading-relaxed font-light mb-6">
+                  {attorneys.featured.bio}
+                </p>
+
+                {/* Specialties */}
+                <div className="mb-8">
+                  <h4 className="text-lg font-semibold text-church-navy mb-3">Community Involvement & Leadership</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {attorneys.featured.specialties.map((specialty, index) => (
+                      <span
+                        key={index}
+                        className="bg-church-light-blue text-church-navy px-3 py-1 rounded-full text-sm leading-relaxed font-light"
+                      >
+                        {specialty}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* CTA Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Button 
+                    className="church-button"
+                    onClick={() => handleLearnMore(attorneys.featured.link)}
+                  >
+                    Learn More About Paola
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="church-button-outline"
+                    onClick={handleScheduleConsultation}
+                  >
+                    <Calendar className="w-4 h-4 mr-2" />
+                    Schedule Consultation
+                  </Button>
+                </div>
+              </div>
+
+              {/* Image */}
+              <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="relative"
+                >
+                  <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-lg overflow-hidden border-4 border-white shadow-divine">
+                    <img 
+                      src={attorneys.featured.image} 
+                      alt={attorneys.featured.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  {/* Decorative Element */}
+                  <div className="absolute -top-4 -right-4 w-24 h-24 bg-church-gold rounded-full opacity-20 animate-pulse"></div>
+                  <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-church-light-blue rounded-full opacity-30"></div>
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Practice Areas Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mb-20"
+          >
+            <div className="text-center mb-12">
+              <h3 className="text-3xl font-bold text-church-navy mb-4">
+                Our Practice Areas
+              </h3>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Comprehensive family law services tailored to meet your unique needs and circumstances
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {practiceAreas.map((area, index) => (
+                <motion.div
+                  key={area.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-white p-6 rounded-xl shadow-soft border border-gray-100 text-center group hover:shadow-golden transition-all duration-300"
+                >
+                  <div className="w-16 h-16 bg-church-gold/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-church-gold/20 transition-colors duration-300">
+                    <area.icon className="w-8 h-8 text-church-gold" />
+                  </div>
+                  <h4 className="text-lg font-bold text-church-navy mb-2">
+                    {area.title}
+                  </h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed font-light">
+                    {area.description}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Team Attorneys */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <div className="text-center mb-12">
+              <h3 className="text-3xl font-bold text-church-navy mb-4">
+                Our Legal Team
+              </h3>
+              <p className="text-lg text-muted-foreground">
+                Dedicated associates bringing diverse expertise to your family law needs
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {attorneys.team.map((attorney, index) => (
+                <motion.div
+                  key={attorney.name}
+                  variants={itemVariants}
+                  whileHover="hover"
+                  className="feature-card text-center group bg-white rounded-xl p-6 shadow-soft hover:shadow-golden transition-all duration-300"
+                >
+                  {/* Attorney Image */}
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-6 border-4 border-white shadow-soft group-hover:shadow-golden transition-all duration-300"
+                  >
+                    <img 
+                      src={attorney.image} 
+                      alt={attorney.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+
+                  {/* Attorney Info */}
+                  <div className="mb-4">
+                    <h4 className="text-xl font-bold text-church-navy mb-1">
+                      {attorney.name}
+                    </h4>
+                    <p className="text-church-gold font-semibold text-sm mb-3">
+                      {attorney.title}
+                    </p>
+                    <p className="text-sm leading-relaxed font-light max-w-3xl mx-auto">
+                      {attorney.bio}
+                    </p>
+                  </div>
+
+                  {/* View Portfolio Link */}
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Button
+                      variant="ghost"
+                      className="text-church-gold hover:text-church-navy hover:bg-church-gold/10 font-semibold py-2 px-4 rounded-lg transition-all duration-300 group/btn"
+                      onClick={() => handleLearnMore(attorney.link)}
+                    >
+                      View Portfolio
+                      <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
+                    </Button>
+                  </motion.div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Bottom CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="text-center mt-16"
+          >
+            <div className="bg-gradient-divine rounded-2xl p-8 shadow-soft">
+              <h3 className="text-2xl md:text-3xl font-bold text-church-navy mb-4">
+                Ready to Discuss Your Case?
+              </h3>
+              <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
+                Schedule a confidential consultation with our bilingual legal team to discuss your family law matters.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button 
+                  className="church-button text-base py-3 px-8"
+                  onClick={handleScheduleConsultation}
+                >
+                  <Calendar className="w-5 h-5 mr-2" />
+                  Book Consultation
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="church-button-outline text-base py-3 px-8"
+                  onClick={() => window.open('tel:904-900-1617', '_self')}
+                >
+                  Call Us: (904) 900-1617
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+      <Footer />
+    </>
   );
 };
 
-export default Attorneys;
+export default AttorneysSection;

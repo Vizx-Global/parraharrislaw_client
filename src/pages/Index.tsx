@@ -16,11 +16,9 @@ const Index = () => {
       <main>
         <HeroSection />
         <PracticeAreas/>
-        <AttorneysSection/>
-        <HowWeWork/> 
         <PricingSection/>
+        <HowWeWork/>
         <Benefits/>
-        <Award/>
         <ContactUs/>
       </main>
         <Footer/>
