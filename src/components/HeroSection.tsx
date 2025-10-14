@@ -10,9 +10,12 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   const handleDownload = () => {
-    // Create a link element to trigger the download
+    // PDF should be in public/assets folder
+    const pdfUrl = '/assets/Co_Parenting_Plan.pdf';
+    
+    // Method 1: Direct download
     const link = document.createElement('a');
-    link.href = '/assets/Co_Parenting_Plan.pdf';
+    link.href = pdfUrl;
     link.download = 'Co_Parenting_Plan.pdf';
     document.body.appendChild(link);
     link.click();
