@@ -1,11 +1,24 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, FileCheck, Clock, Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import heroBackground from "@/assets/HeroTrial.jpg";
 import expertise2021 from "@/assets/Expertise2021.png";
 import phlAward from "@/assets/LegalAbility.png";
 import avoRatingBadge from "@/assets/Avo Rating.png";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
+  const handleDownload = () => {
+    // Create a link element to trigger the download
+    const link = document.createElement('a');
+    link.href = '/assets/Co_Parenting_Plan.pdf';
+    link.download = 'Co_Parenting_Plan.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
       {/* Background Image with Parallax Effect */}
@@ -69,6 +82,7 @@ const HeroSection = () => {
           <Button 
             size="lg"
             className="bg-secondary hover:bg-secondary/90 text-gray-900 px-8 py-6 text-lg font-semibold rounded-full shadow-2xl transition-all duration-300 hover:scale-105 min-w-[180px] group"
+            onClick={() => navigate('/pricing')}
           >
             <span>View Plans</span>
             <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
@@ -77,48 +91,50 @@ const HeroSection = () => {
             variant="outline"
             size="lg"
             className="border-2 bg-white/10 hover:bg-white/20 text-white border-white/30 backdrop-blur-sm px-8 py-6 text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105 min-w-[180px] group"
+            onClick={() => navigate('/contact')}
           >
             <span>Contact Us</span>
             <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
           </Button>
         </div>
-  {/* Social Proof - Awards */}
-      <div className="pt-8 border-t border-white/10">
-        <p className="text-xs text-white/60 mb-4">Award-Winning Legal Excellence</p>
-        <div className="flex items-center gap-6 opacity-90">
-          {/* Expertise 2021 Award */}
-          <div className="h-12 w-auto">
-            <img 
-              src={expertise2021} 
-              alt="Expertise 2021 Award"
-              className="h-full rounded-full w-auto object-contain"
-            />
+
+        {/* Social Proof - Awards */}
+        <div className="pt-8 border-t border-white/10">
+          <p className="text-xs text-white/60 mb-4">Award-Winning Legal Excellence</p>
+          <div className="flex items-center gap-6 opacity-90">
+            {/* Expertise 2021 Award */}
+            <div className="h-12 w-auto">
+              <img 
+                src={expertise2021} 
+                alt="Expertise 2021 Award"
+                className="h-full rounded-full w-auto object-contain"
+              />
+            </div>
+            
+            {/* PHL Award */}
+            <div className="h-12 w-auto">
+              <img 
+                src={phlAward} 
+                alt="PHL Award"
+                className="h-full w-auto object-contain rounded-full"
+              />
+            </div>
+            
+            {/* AVVO Rating Badge - Clickable */}
+            <a 
+              href="https://www.avvo.com/attorneys/32217-fl-paola-parra-528267.html" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="h-12 w-auto transition-transform duration-300 hover:scale-110 hover:opacity-100"
+            >
+              <img 
+                src={avoRatingBadge} 
+                alt="AVVO Rating Badge"
+                className="h-full w-auto rounded-full object-contain"
+              />
+            </a>
           </div>
-          
-          {/* PHL Award */}
-          <div className="h-12 w-auto">
-            <img 
-              src={phlAward} 
-              alt="PHL Award"
-              className="h-full w-auto object-contain rounded-full"
-            />
-          </div>
-          
-          {/* AVVO Rating Badge - Clickable */}
-          <a 
-            href="https://www.avvo.com/attorneys/32217-fl-paola-parra-528267.html" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="h-12 w-auto transition-transform duration-300 hover:scale-110 hover:opacity-100"
-          >
-            <img 
-              src={avoRatingBadge} 
-              alt="AVVO Rating Badge"
-              className="h-full w-auto rounded-full object-contain"
-            />
-          </a>
         </div>
-      </div>
       </div>
 
       {/* Scroll Indicator */}
@@ -140,7 +156,10 @@ const HeroSection = () => {
               <p className="text-white/60 text-sm">Download Sample Plan</p>
             </div>
           </div>
-          <Button className="w-full bg-secondary hover:bg-secondary/90 text-gray-900 mt-2">
+          <Button 
+            className="w-full bg-secondary hover:bg-secondary/90 text-gray-900 mt-2"
+            onClick={handleDownload}
+          >
             Download
           </Button>
         </div>
