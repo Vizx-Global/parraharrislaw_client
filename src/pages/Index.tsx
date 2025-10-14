@@ -15,10 +15,8 @@ const Index = () => {
       <Header />
       <main>
         <HeroSection />
-        <PracticeAreas/>
         <PricingSection/>
-        <HowWeWork/>
-        <Benefits/>
+        <PracticeAreas/>
         <ContactUs/>
       </main>
         <Footer/>

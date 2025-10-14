@@ -19,35 +19,19 @@ import {
   User,
   BookOpen,
   Newspaper,
-  Contact,
-  Library,
-  Award
+  Contact
 } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const practiceAreas = [
-    "Jacksonville Divorce Attorney",
-    "Child Support and Alimony",
-    "Distribution of Assets & Liabilities",
-    "Contempt, Enforcement, and Modification",
-    "Paternity",
-    "Child Custody & Timesharing",
-    "Visitation and Relocation",
-    "Domestic Violence/Other Violence",
-    "Family Adoption"
-  ];
-
   const quickLinks = [
     { name: "Home", icon: Home },
-    { name: "Practice Areas", icon: FileText },
-    { name: "Attorneys", icon: User },
     { name: "About Us", icon: Users },
-    { name: "Resources", icon: Library },
-    { name: "Blog", icon: BookOpen },
-    { name: "In the News", icon: Newspaper },
-    { name: "Contact Us", icon: Contact }
+    { name: "Pricing", icon: Crown },
+    { name: "How It Works", icon: BookOpen },
+    { name: "Attorney", icon: User },
+    { name: "Contact", icon: Contact }
   ];
 
   const socialLinks = [
@@ -95,7 +79,7 @@ const Footer = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12"
+            className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12"
           >
             {/* Brand Column */}
             <motion.div variants={itemVariants} className="lg:col-span-1">
@@ -174,29 +158,6 @@ const Footer = () => {
                     
                     {/* Hover Arrow */}
                     <ArrowRight className="w-3 h-3 text-church-gold opacity-0 group-hover:opacity-100 translate-x-[-5px] group-hover:translate-x-0 transition-all duration-300" />
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-
-            {/* Practice Areas Column */}
-            <motion.div variants={itemVariants} className="lg:col-span-1">
-              <h4 className="text-lg font-bold mb-6 flex items-center gap-2">
-                <FileText className="w-5 h-5 text-church-gold" />
-                Practice Areas
-              </h4>
-              <ul className="space-y-3">
-                {practiceAreas.map((area, index) => (
-                  <motion.li
-                    key={area}
-                    variants={itemVariants}
-                    whileHover={{ x: 5 }}
-                    className="flex items-center gap-2 group cursor-pointer"
-                  >
-                    <ArrowRight className="w-3 h-3 text-church-gold opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <span className="text-blue-100 hover:text-church-gold transition-colors duration-300 text-sm">
-                      {area}
-                    </span>
                   </motion.li>
                 ))}
               </ul>
