@@ -40,7 +40,7 @@ const HeroSection = () => {
           <div className="flex items-center gap-3 mb-2">
             <Shield className="w-8 h-8 text-secondary" />
             <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-6xl font-bold leading-tight tracking-tight">
-              Legally Complaint<br/> Co-parenting Plans.
+              Co-parenting Plans.
             </h1>
           </div>
         </div>
