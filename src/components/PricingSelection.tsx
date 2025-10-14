@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Star, Crown, MessageCircle, Download, FileText, Shield, ArrowRight } from "lucide-react";
+import { Check, Star, Crown, MessageCircle, Download, FileText, Shield, ArrowRight, Lock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Commet } from "react-loading-indicators";
@@ -23,13 +23,31 @@ const PricingSection = () => {
   const [loadingRoute, setLoadingRoute] = useState("");
   const navigate = useNavigate();
 
-  const handlePlanClick = (route: string, planName: string) => {
+  const handlePlanClick = (route: string, planName: string, requiresDIY: boolean = false) => {
     setLoadingRoute(planName);
     setLoading(true);
     
     setTimeout(() => {
       setLoading(false);
-      navigate(route); 
+      if (requiresDIY) {
+        // Store intent to upgrade to Advanced after DIY completion
+        localStorage.setItem('upgradeToAdvanced', 'true');
+        navigate('/diy-plan');
+      } else {
+        navigate(route);
+      }
+    }, 2500);
+  };
+
+  const handleAdvancedPlanClick = () => {
+    setLoadingRoute("Advanced Plan");
+    setLoading(true);
+    
+    setTimeout(() => {
+      setLoading(false);
+      // Always redirect to DIY first for Advanced plan
+      localStorage.setItem('upgradeToAdvanced', 'true');
+      navigate('/diy-plan');
     }, 2500);
   };
 
@@ -53,7 +71,8 @@ const PricingSection = () => {
       ],
       cta: "Get Started",
       route: "/diy-plan",
-      popular: true
+      popular: true,
+      requiresDIY: false
     },
     {
       name: "Advanced Plan",
@@ -71,11 +90,13 @@ const PricingSection = () => {
         { icon: FileText, text: "Financial affidavit (both parents)" },
         { icon: FileText, text: "Child support guidelines" },
         { icon: MessageCircle, text: "Direct attorney messaging" },
-        { icon: Check, text: "Custom clause insertion" }
+        { icon: Check, text: "Custom clause insertion" },
+        { icon: Lock, text: "Requires DIY completion first" }
       ],
-      cta: "Get Started",
+      cta: "Upgrade Your Plan",
       route: "/advance-plan",
-      highlighted: true
+      highlighted: true,
+      requiresDIY: true
     },
     {
       name: "Consultation Add-on",
@@ -90,7 +111,8 @@ const PricingSection = () => {
         { icon: Download, text: "Post-meeting notes" }
       ],
       cta: "Book Consultation",
-      route: "/book-consultation"
+      route: "/book-consultation",
+      requiresDIY: false
     }
   ];
 
@@ -142,14 +164,48 @@ const PricingSection = () => {
           >
             <div className="inline-flex items-center gap-2 bg-gradient-divine text-church-navy px-4 py-2 rounded-full mb-4">
               <Shield className="w-4 h-4" />
-              <span className="text-sm font-semibold">Transparent Pricing</span>
+              <span className="text-sm font-semibold">Smart Planning Process</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-church-navy mb-4">
-              Choose the Plan That's Right For You
+              Build Your Co-Parenting Plan Step by Step
             </h2>
             <p className="text-xl leading-relaxed font-light max-w-3xl mx-auto">
-              Clear pricing, no hidden fees. All plans include Florida-compliant documents.
+              Start with the essential DIY plan, then upgrade to Advanced for comprehensive legal features and attorney review.
             </p>
+          </motion.div>
+
+          {/* Process Explanation */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto mb-12 bg-white rounded-2xl p-8 shadow-lg border border-church-gold/20"
+          >
+            <h3 className="text-2xl font-bold text-church-navy mb-6 text-center">How It Works</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+              <div className="space-y-3">
+                <div className="w-12 h-12 bg-church-gold rounded-full flex items-center justify-center mx-auto">
+                  <span className="text-white font-bold text-lg">1</span>
+                </div>
+                <h4 className="font-semibold text-church-navy">Complete DIY Questionnaire</h4>
+                <p className="text-sm text-gray-600">Fill out all essential parenting plan questions</p>
+              </div>
+              <div className="space-y-3">
+                <div className="w-12 h-12 bg-church-gold rounded-full flex items-center justify-center mx-auto">
+                  <span className="text-white font-bold text-lg">2</span>
+                </div>
+                <h4 className="font-semibold text-church-navy">Review Your Plan</h4>
+                <p className="text-sm text-gray-600">Get your complete DIY parenting plan document</p>
+              </div>
+              <div className="space-y-3">
+                <div className="w-12 h-12 bg-church-gold rounded-full flex items-center justify-center mx-auto">
+                  <span className="text-white font-bold text-lg">3</span>
+                </div>
+                <h4 className="font-semibold text-church-navy">Upgrade to Advanced</h4>
+                <p className="text-sm text-gray-600">Add financial calculations & attorney review</p>
+              </div>
+            </div>
           </motion.div>
 
           {/* Pricing Cards */}
@@ -164,14 +220,15 @@ const PricingSection = () => {
               <motion.div
                 key={plan.name}
                 variants={cardVariants}
-                whileHover="hover"
+                whileHover={plan.requiresDIY ? {} : "hover"}
                 className="flex flex-col h-full"
               >
                 <Card className={`church-card h-full flex flex-col relative overflow-hidden ${
                   plan.highlighted 
                     ? 'border-2 border-church-gold shadow-golden scale-105' 
                     : 'border border-border'
-                }`}>
+                } ${plan.requiresDIY ? 'cursor-default' : ''}`}>
+                  
                   {/* Badge */}
                   {plan.badge && (
                     <div className="absolute top-4 right-4 z-10">
@@ -187,9 +244,14 @@ const PricingSection = () => {
 
                   {/* Card Header */}
                   <CardHeader className="pb-4">
-                    <h3 className="text-2xl font-bold text-church-navy">
-                      {plan.name}
-                    </h3>
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-2xl font-bold text-church-navy">
+                        {plan.name}
+                      </h3>
+                      {plan.requiresDIY && (
+                        <Lock className="w-4 h-4 text-church-gold" />
+                      )}
+                    </div>
                     <div className="flex items-baseline gap-1">
                       <span className="text-4xl font-bold text-church-navy">
                         {plan.price}
@@ -208,11 +270,15 @@ const PricingSection = () => {
                           <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
                             feature.icon === Shield 
                               ? 'bg-church-light-blue text-church-navy' 
+                              : feature.icon === Lock
+                              ? 'bg-orange-100 text-orange-600'
                               : 'bg-church-gold/20 text-church-gold'
                           }`}>
                             <feature.icon className="w-3 h-3" />
                           </div>
-                          <span className="text-sm text-muted-foreground">
+                          <span className={`text-sm ${
+                            feature.icon === Lock ? 'text-orange-600 font-medium' : 'text-muted-foreground'
+                          }`}>
                             {feature.text}
                           </span>
                         </li>
@@ -223,7 +289,7 @@ const PricingSection = () => {
                   {/* Card Footer */}
                   <CardFooter>
                     <Button 
-                      onClick={() => handlePlanClick(plan.route, plan.name)}
+                      onClick={() => plan.requiresDIY ? handleAdvancedPlanClick() : handlePlanClick(plan.route, plan.name)}
                       className={`w-full py-6 text-base font-semibold ${
                         plan.highlighted 
                           ? 'church-button' 
@@ -257,7 +323,7 @@ const PricingSection = () => {
             className="text-center"
           >
             <p className="text-gray-600 mb-4">
-              All plans start with our comprehensive co-parenting questionnaire
+              All plans include Florida-compliant documents and court-ready formatting
             </p>
             <a 
               href="/pricing" 
