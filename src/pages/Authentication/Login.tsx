@@ -195,7 +195,7 @@ export default function SignInPage() {
                 <input
                   type="email"
                   placeholder="your.email@example.com"
-                  className={`w-full pl-12 pr-4 py-4 border-2 rounded-xl focus:ring-2 focus:ring-church-gold/20 transition-all duration-300 bg-white/80 backdrop-blur-sm ${
+                  className={`w-full pl-12 pr-4 py-4 border-2 rounded-xl focus:ring-2 focus:ring-church-gold/20 transition-all duration-300  ${
                     errors.email ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-church-gold'
                   }`}
                   value={formData.email}
@@ -226,7 +226,7 @@ export default function SignInPage() {
                 <input
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Enter your password"
-                  className={`w-full pl-12 pr-12 py-4 border-2 rounded-xl focus:ring-2 focus:ring-church-gold/20 transition-all duration-300 bg-white/80 backdrop-blur-sm ${
+                  className={`w-full pl-12 pr-12 py-4 border-2 rounded-xl focus:ring-2 focus:ring-church-gold/20 transition-all duration-300  ${
                     errors.password ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-church-gold'
                   }`}
                   value={formData.password}

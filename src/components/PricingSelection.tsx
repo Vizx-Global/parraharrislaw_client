@@ -47,7 +47,7 @@ const PricingSection = () => {
       setLoading(false);
       // Always redirect to DIY first for Advanced plan
       localStorage.setItem('upgradeToAdvanced', 'true');
-      navigate('/diy-plan');
+      navigate('/advance-plan');
     }, 2500);
   };
 
@@ -174,40 +174,6 @@ const PricingSection = () => {
             </p>
           </motion.div>
 
-          {/* Process Explanation */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto mb-12 bg-white rounded-2xl p-8 shadow-lg border border-church-gold/20"
-          >
-            <h3 className="text-2xl font-bold text-church-navy mb-6 text-center">How It Works</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-              <div className="space-y-3">
-                <div className="w-12 h-12 bg-church-gold rounded-full flex items-center justify-center mx-auto">
-                  <span className="text-white font-bold text-lg">1</span>
-                </div>
-                <h4 className="font-semibold text-church-navy">Complete DIY Questionnaire</h4>
-                <p className="text-sm text-gray-600">Fill out all essential parenting plan questions</p>
-              </div>
-              <div className="space-y-3">
-                <div className="w-12 h-12 bg-church-gold rounded-full flex items-center justify-center mx-auto">
-                  <span className="text-white font-bold text-lg">2</span>
-                </div>
-                <h4 className="font-semibold text-church-navy">Review Your Plan</h4>
-                <p className="text-sm text-gray-600">Get your complete DIY parenting plan document</p>
-              </div>
-              <div className="space-y-3">
-                <div className="w-12 h-12 bg-church-gold rounded-full flex items-center justify-center mx-auto">
-                  <span className="text-white font-bold text-lg">3</span>
-                </div>
-                <h4 className="font-semibold text-church-navy">Upgrade to Advanced</h4>
-                <p className="text-sm text-gray-600">Add financial calculations & attorney review</p>
-              </div>
-            </div>
-          </motion.div>
-
           {/* Pricing Cards */}
           <motion.div
             variants={containerVariants}
@@ -313,6 +279,41 @@ const PricingSection = () => {
               </motion.div>
             ))}
           </motion.div>
+          
+          {/* Process Explanation */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto mb-12 bg-white rounded-2xl p-8 shadow-lg border border-church-gold/20"
+          >
+            <h3 className="text-2xl font-bold text-church-navy mb-6 text-center">How It Works</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+              <div className="space-y-3">
+                <div className="w-12 h-12 bg-church-gold rounded-full flex items-center justify-center mx-auto">
+                  <span className="text-white font-bold text-lg">1</span>
+                </div>
+                <h4 className="font-semibold text-church-navy">Complete DIY Questionnaire</h4>
+                <p className="text-sm text-gray-600">Fill out all essential parenting plan questions</p>
+              </div>
+              <div className="space-y-3">
+                <div className="w-12 h-12 bg-church-gold rounded-full flex items-center justify-center mx-auto">
+                  <span className="text-white font-bold text-lg">2</span>
+                </div>
+                <h4 className="font-semibold text-church-navy">Review Your Plan</h4>
+                <p className="text-sm text-gray-600">Get your complete DIY parenting plan document</p>
+              </div>
+              <div className="space-y-3">
+                <div className="w-12 h-12 bg-church-gold rounded-full flex items-center justify-center mx-auto">
+                  <span className="text-white font-bold text-lg">3</span>
+                </div>
+                <h4 className="font-semibold text-church-navy">Upgrade to Advanced</h4>
+                <p className="text-sm text-gray-600">Add financial calculations & attorney review</p>
+              </div>
+            </div>
+          </motion.div>
+
 
           {/* Bottom CTA */}
           <motion.div
