@@ -1,7 +1,6 @@
-// components/dashboard/DashboardLayout.tsx
 import { useState } from 'react';
 import Sidebar from './Sidebar';
-import TopBar from './TopBar';
+import TopBar from './Topbar';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -23,22 +22,22 @@ export default function DashboardLayout({ children, user }: DashboardLayoutProps
   return (
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
-      <Sidebar 
-        isOpen={sidebarOpen} 
+      <Sidebar
+        isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
         isCollapsed={sidebarCollapsed}
       />
-      
+
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden min-w-0">
         {/* Top Bar */}
-        <TopBar 
+        <TopBar
           user={user}
           onMenuClick={() => setSidebarOpen(true)}
           onToggleSidebar={toggleSidebar}
           sidebarCollapsed={sidebarCollapsed}
         />
-        
+
         {/* Main Content Area - Remove the dynamic margin from here */}
         <main className="flex-1 overflow-auto">
           <div className="p-6 w-full max-w-full">
