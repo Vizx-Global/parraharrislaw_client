@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProgressBar from './Components/ProgressiveBar';
 import SectionHeader from './Components/SectionHeader';
 import QuestionRenderer from './Components/QuestionRenderer';
 import NavigationButtons from './Components/NavigationButtons';
 import ValidationSummary from './Components/ValidationSummary';
 import PaymentSection from './Components/PaymentSection';
-import Header from '@/components/HeaderTwo'; 
-import Footer from '@/components/Footer'; 
+import Header from '@/components/HeaderTwo';
+import Footer from '@/components/Footer';
 import { sections, paymentMethods, initialFormData } from './data/FormData'
 
 const getNestedValue = (obj, path) => {
@@ -24,14 +24,18 @@ export default function InteractiveCoParentingQuestionnaire() {
   const [showErrors, setShowErrors] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentSection, showPayment]);
+
   const validateSection = (sectionIndex) => {
     const currentSectionData = sections[sectionIndex];
     const errors = {};
-    
+
     currentSectionData.questions.forEach(question => {
       if (question.required) {
         const value = getNestedValue(formData, question.id);
-        
+
         if (question.type === 'interactive-checkbox') {
           if (!value || value.length === 0) {
             errors[question.id] = 'Please select at least one option';
@@ -45,27 +49,27 @@ export default function InteractiveCoParentingQuestionnaire() {
         }
       }
     });
-    
+
     return errors;
   };
 
   const handleInputChange = (path, value) => {
     setFormData(prev => {
       const keys = path.split('.');
-      
+
       if (keys.length === 1) {
         return {
           ...prev,
           [path]: value
         };
       }
-  
+
       const newData = { ...prev };
       let current = newData;
- 
+
       for (let i = 0; i < keys.length - 1; i++) {
         const key = keys[i];
-  
+
         if (!current[key] || typeof current[key] !== 'object') {
           current[key] = {};
         } else {
@@ -73,13 +77,13 @@ export default function InteractiveCoParentingQuestionnaire() {
         }
         current = current[key];
       }
-  
+
       const lastKey = keys[keys.length - 1];
       current[lastKey] = value;
-      
+
       return newData;
     });
-    
+
     if (validationErrors[path]) {
       setValidationErrors(prev => ({
         ...prev,
@@ -90,11 +94,11 @@ export default function InteractiveCoParentingQuestionnaire() {
 
   const nextSection = () => {
     const errors = validateSection(currentSection);
-    
+
     if (Object.keys(errors).length > 0) {
       setValidationErrors(errors);
       setShowErrors(true);
-      
+
       const firstErrorId = Object.keys(errors)[0];
       const errorElement = document.querySelector(`[data-field="${firstErrorId}"]`);
       if (errorElement) {
@@ -102,10 +106,10 @@ export default function InteractiveCoParentingQuestionnaire() {
       }
       return;
     }
-    
+
     setValidationErrors({});
     setShowErrors(false);
-    
+
     if (currentSection < sections.length - 1) {
       setCurrentSection(currentSection + 1);
     } else {
@@ -116,7 +120,7 @@ export default function InteractiveCoParentingQuestionnaire() {
   const prevSection = () => {
     setValidationErrors({});
     setShowErrors(false);
-    
+
     if (showPayment) {
       setShowPayment(false);
     } else if (currentSection > 0) {
@@ -145,7 +149,7 @@ export default function InteractiveCoParentingQuestionnaire() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <div className="flex-1 bg-gradient-to-br from-gray-50 to-blue-50/30 mt-20 py-6">
         <div className="max-w-6xl mx-auto px-4">
           <ProgressBar
@@ -158,7 +162,7 @@ export default function InteractiveCoParentingQuestionnaire() {
             <SectionHeader section={currentSectionData} />
 
             <div className="p-8">
-              <ValidationSummary 
+              <ValidationSummary
                 showErrors={showErrors}
                 validationErrors={validationErrors}
               />
@@ -186,7 +190,7 @@ export default function InteractiveCoParentingQuestionnaire() {
           </div>
         </div>
       </div>
-      
+
       <Footer />
     </div>
   );
