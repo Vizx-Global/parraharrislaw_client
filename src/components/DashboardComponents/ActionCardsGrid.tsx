@@ -93,7 +93,6 @@ export default function ActionCardsGrid() {
               
               <p className="text-sm text-foreground mb-4">{action.description}</p>
               
-              {/* Progress Bar */}
               {action.progress > 0 && (
                 <div className="mb-4">
                   <div className="flex justify-between text-xs text-muted-foreground mb-1">

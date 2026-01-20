@@ -6,14 +6,11 @@ import {
   Trophy, 
   Star, 
   Users, 
-  Shield, 
   TrendingUp,
   ChevronRight,
   Quote
 } from "lucide-react";
 import awardBadge from "@/assets/Expertise2021.png";
-import communityImage from "@/assets/community-spotlight.jpg";
-import excellenceAward from "@/assets/excellence-award.png";
 
 const CommunitySpotlight = () => {
   const awards = [
@@ -116,7 +113,6 @@ const CommunitySpotlight = () => {
 
   return (
     <section className="py-10 bg-white relative overflow-hidden">
-      {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           animate={{
@@ -143,7 +139,6 @@ const CommunitySpotlight = () => {
           className="absolute -bottom-32 -left-32 w-64 h-64 bg-church-light-blue/10 rounded-full"
         />
         
-        {/* Floating Award Icons */}
         <motion.div
           variants={floatingAnimation}
           animate="animate"
@@ -170,7 +165,6 @@ const CommunitySpotlight = () => {
       </div>
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
-        {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -203,7 +197,6 @@ const CommunitySpotlight = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Left Column - Awards Content */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -211,7 +204,7 @@ const CommunitySpotlight = () => {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            {awards.map((award, index) => (
+            {awards.map((award) => (
               <motion.div
                 key={award.category}
                 variants={itemVariants}
@@ -220,7 +213,6 @@ const CommunitySpotlight = () => {
               >
                 <Card className="bg-gradient-divine hover:border-church-gold/50 transition-all duration-300">
                   <CardContent className="p-6">
-                    {/* Award Header */}
                     <div className="flex items-center gap-3 mb-4">
                       <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${award.color} flex items-center justify-center text-white shadow-lg`}>
                         <award.icon className="w-6 h-6" />
@@ -233,7 +225,6 @@ const CommunitySpotlight = () => {
                       </div>
                     </div>
 
-                    {/* Award Items */}
                     <ul className="space-y-2">
                       {award.items.map((item, itemIndex) => (
                         <motion.li
@@ -255,7 +246,6 @@ const CommunitySpotlight = () => {
             ))}
           </motion.div>
 
-          {/* Right Column - Visual Elements & Stats */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -263,7 +253,6 @@ const CommunitySpotlight = () => {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            {/* Main Award Image */}
             <motion.div
               whileHover={{ scale: 1.05 }}
               className="relative rounded-2xl overflow-hidden shadow-2xl"
@@ -293,7 +282,6 @@ const CommunitySpotlight = () => {
                 </div>
               </div>
               
-              {/* Floating Elements */}
               <motion.div
                 animate={{
                   y: [0, -20, 0],
@@ -310,7 +298,6 @@ const CommunitySpotlight = () => {
               </motion.div>
             </motion.div>
 
-            {/* Stats Grid */}
             <motion.div
               variants={containerVariants}
               initial="hidden"
@@ -318,7 +305,7 @@ const CommunitySpotlight = () => {
               viewport={{ once: true }}
               className="grid grid-cols-2 gap-4"
             >
-              {stats.map((stat, index) => (
+              {stats.map((stat) => (
                 <motion.div
                   key={stat.label}
                   variants={itemVariants}
@@ -334,7 +321,6 @@ const CommunitySpotlight = () => {
               ))}
             </motion.div>
 
-            {/* Testimonials */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -367,7 +353,6 @@ const CommunitySpotlight = () => {
               </div>
             </motion.div>
 
-            {/* CTA Button */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

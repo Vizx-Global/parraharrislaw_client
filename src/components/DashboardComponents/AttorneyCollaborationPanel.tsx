@@ -33,10 +33,8 @@ export default function AttorneyCollaborationPanel() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Attorney Profile */}
         <div className="lg:col-span-1">
           <div className="bg-gradient-to-br from-church-navy to-primary-glow rounded-xl p-6 text-white text-center">
-            {/* Company Logo */}
             <div className="w-28 h-28 rounded-full flex items-center justify-center mx-auto mb-4 p-2">
               <img 
                 src={CompanyLogo} 
@@ -60,7 +58,6 @@ export default function AttorneyCollaborationPanel() {
               </div>
             </div>
 
-            {/* Bar Admissions */}
             <div className="mt-4 pt-4 border-t border-church-light-blue/20">
               <p className="text-xs text-church-light-blue mb-2">Bar Admissions:</p>
               <div className="flex flex-wrap justify-center gap-1">
@@ -74,7 +71,6 @@ export default function AttorneyCollaborationPanel() {
           </div>
         </div>
 
-        {/* Communication Options */}
         <div className="lg:col-span-2">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <button className="flex flex-col items-center p-4 border-2 border-church-gold rounded-xl bg-orange-50 hover:bg-orange-100 transition-colors group">
@@ -96,7 +92,6 @@ export default function AttorneyCollaborationPanel() {
             </button>
           </div>
 
-          {/* Attorney Credentials */}
           <div className="mb-6 p-4 bg-gray-50 rounded-lg">
             <h4 className="font-semibold text-foreground mb-3">Attorney Credentials</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
@@ -119,7 +114,6 @@ export default function AttorneyCollaborationPanel() {
             </div>
           </div>
 
-          {/* Recent Activity */}
           <div>
             <h4 className="font-semibold text-foreground mb-3">Recent Attorney Activity</h4>
             <div className="space-y-3">

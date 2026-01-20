@@ -118,7 +118,6 @@ export default function DocumentStatusPanel() {
         })}
       </div>
 
-      {/* Quick Actions */}
       <div className="mt-6 grid grid-cols-2 gap-3">
         <button className="church-button-outline py-2 text-sm flex items-center justify-center space-x-2">
           <Download size={16} />

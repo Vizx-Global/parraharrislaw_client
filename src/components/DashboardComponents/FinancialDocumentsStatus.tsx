@@ -1,4 +1,4 @@
-import { CheckCircle, XCircle, Clock, AlertTriangle, FileText, Upload } from 'lucide-react';
+import { CheckCircle, Clock, AlertTriangle, FileText, Upload } from 'lucide-react';
 
 const documents = [
   {
@@ -87,7 +87,6 @@ export default function FinancialDocumentsStatus() {
         </div>
       </div>
 
-      {/* Progress Summary */}
       <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm font-medium text-blue-900">Document Progress</span>
@@ -101,7 +100,6 @@ export default function FinancialDocumentsStatus() {
         </div>
       </div>
 
-      {/* Documents List */}
       <div className="space-y-4">
         {documents.map((doc) => {
           const config = statusConfig[doc.status as keyof typeof statusConfig];
@@ -134,7 +132,6 @@ export default function FinancialDocumentsStatus() {
         })}
       </div>
 
-      {/* Upload Action */}
       <button className="w-full mt-4 church-button flex items-center justify-center space-x-2">
         <Upload size={16} />
         <span>Upload Documents</span>

@@ -7,9 +7,7 @@ import {
   MapPin, 
   Send, 
   Clock,
-  Building,
-  User,
-  FileText
+  Building
 } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
 
@@ -32,12 +30,10 @@ const ContactSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
   };
 
   return (
     <section id="contact" className="py-20 bg-gradient-to-b from-church-cream to-white relative overflow-hidden">
-      {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           animate={{
@@ -66,7 +62,6 @@ const ContactSection = () => {
       </div>
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -100,7 +95,6 @@ const ContactSection = () => {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
-          {/* Left Info Panel */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -108,7 +102,6 @@ const ContactSection = () => {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            {/* Contact Information */}
             <div className="rounded-2xl bg-white/80 backdrop-blur-sm p-8 border border-church-gold/20 shadow-soft hover:shadow-divine transition-all duration-300">
               <h3 className="text-2xl font-bold text-church-navy mb-6 flex items-center gap-3">
                 <Building className="w-6 h-6 text-church-gold" />
@@ -143,7 +136,6 @@ const ContactSection = () => {
               </div>
             </div>
 
-            {/* Business Hours */}
             <div className="rounded-2xl bg-white/80 backdrop-blur-sm p-8 border border-church-gold/20 shadow-soft hover:shadow-divine transition-all duration-300">
               <h3 className="text-xl font-bold text-church-navy mb-6 flex items-center gap-3">
                 <Clock className="w-5 h-5 text-church-gold" />
@@ -161,7 +153,6 @@ const ContactSection = () => {
               </div>
             </div>
 
-            {/* Emergency Contact */}
             <div className="rounded-2xl bg-gradient-divine p-6 border border-church-gold/30 shadow-soft hover:shadow-divine transition-all duration-300">
               <h4 className="text-lg font-bold text-church-navy mb-3">Emergency Legal Assistance</h4>
               <p className="text-church-navy/80 text-sm mb-4">
@@ -174,7 +165,6 @@ const ContactSection = () => {
             </div>
           </motion.div>
 
-          {/* Right Form Panel */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}

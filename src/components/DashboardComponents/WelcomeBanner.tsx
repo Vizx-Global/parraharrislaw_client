@@ -3,7 +3,6 @@ import { Shield, Star, Clock } from 'lucide-react';
 export default function WelcomeBanner() {
   return (
     <div className="bg-gradient-to-r from-church-navy to-primary-glow rounded-2xl p-8 text-white relative overflow-hidden">
-      {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-4 right-4 w-24 h-24 bg-church-gold rounded-full"></div>
         <div className="absolute bottom-4 left-4 w-16 h-16 bg-church-light-blue rounded-full"></div>
@@ -21,7 +20,6 @@ export default function WelcomeBanner() {
               We're here to ensure every detail supports your family's future.
             </p>
             
-            {/* Quick Stats */}
             <div className="flex flex-wrap gap-6 mt-6">
               <div className="flex items-center space-x-2">
                 <Star className="w-5 h-5 text-church-gold" />
@@ -34,7 +32,6 @@ export default function WelcomeBanner() {
             </div>
           </div>
           
-          {/* Plan Status Badge */}
           <div className="mt-4 lg:mt-0 lg:text-right">
             <div className="bg-church-gold/20 backdrop-blur-sm border border-church-gold/30 rounded-2xl p-4">
               <div className="text-church-gold font-semibold text-lg">Advanced Legal Plan</div>

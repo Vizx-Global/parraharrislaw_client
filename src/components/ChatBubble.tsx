@@ -30,7 +30,6 @@ const SimpleChatBubble = () => {
 
   return (
     <>
-      {/* Main Chat Bubble Trigger */}
       <motion.button
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -41,7 +40,6 @@ const SimpleChatBubble = () => {
       >
         <MessageCircle className="w-7 h-7" />
         
-        {/* Pulsing Animation */}
         <motion.div
           className="absolute inset-0 rounded-full bg-church-gold/20 border-2 border-church-gold/30"
           animate={{ scale: [1, 1.2, 1] }}
@@ -49,11 +47,9 @@ const SimpleChatBubble = () => {
         />
       </motion.button>
 
-      {/* Quick Actions Panel */}
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -62,7 +58,6 @@ const SimpleChatBubble = () => {
               className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm"
             />
             
-            {/* Actions Panel */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -70,7 +65,6 @@ const SimpleChatBubble = () => {
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
               className="fixed bottom-24 right-6 z-50 w-80 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden"
             >
-              {/* Header */}
               <div className="bg-gradient-to-r from-church-navy to-church-light-blue p-4 text-white">
                 <div className="flex items-center justify-between">
                   <div>
@@ -86,7 +80,6 @@ const SimpleChatBubble = () => {
                 </div>
               </div>
 
-              {/* Actions */}
               <div className="p-4 space-y-3">
                 {actions.map((action, index) => (
                   <motion.button
@@ -115,7 +108,6 @@ const SimpleChatBubble = () => {
                 ))}
               </div>
 
-              {/* Footer */}
               <div className="px-4 py-3 bg-gray-50 border-t border-gray-200">
                 <p className="text-xs text-gray-500 text-center">
                   Typically respond within 1 business hour

@@ -1,4 +1,4 @@
-import { MessageSquare, FileText, UserCheck, Calendar, CheckCircle, AlertCircle } from 'lucide-react';
+import { MessageSquare, FileText, UserCheck, CheckCircle, AlertCircle } from 'lucide-react';
 
 const activities = [
   {
@@ -72,7 +72,6 @@ export default function RecentActivityTimeline() {
           
           return (
             <div key={activity.id} className="flex items-start space-x-4 group">
-              {/* Timeline dot and connector */}
               <div className="flex flex-col items-center">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center ${activity.bg} group-hover:scale-110 transition-transform`}>
                   <Icon className={activity.color} size={18} />
@@ -82,7 +81,6 @@ export default function RecentActivityTimeline() {
                 )}
               </div>
               
-              {/* Activity content */}
               <div className="flex-1 pb-4 group-last:pb-0">
                 <div className="flex items-start justify-between mb-1">
                   <h3 className="font-semibold text-foreground text-sm">{activity.title}</h3>
@@ -90,7 +88,6 @@ export default function RecentActivityTimeline() {
                 </div>
                 <p className="text-sm text-muted-foreground">{activity.description}</p>
                 
-                {/* Action buttons for relevant activities */}
                 {(activity.type === 'message' || activity.type === 'document') && (
                   <div className="mt-2 flex space-x-2">
                     {activity.type === 'message' && (
@@ -111,7 +108,6 @@ export default function RecentActivityTimeline() {
         })}
       </div>
 
-      {/* Summary Stats */}
       <div className="mt-6 pt-4 border-t border-border">
         <div className="grid grid-cols-3 gap-4 text-center">
           <div>

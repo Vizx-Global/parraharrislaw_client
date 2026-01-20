@@ -2,21 +2,18 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
   CheckCircle2, 
-  Clock, 
   DollarSign, 
   Smile, 
   Shield, 
   PenSquare, 
   Headphones, 
-  Download, 
-  Gavel,
   Zap,
   Users,
-  TrendingUp,
   CheckCircle,
   Award,
   Calendar,
-  Star
+  Star,
+  Gavel
 } from "lucide-react";
 
 import familyImage from "@/assets/family.jpg";
@@ -172,7 +169,6 @@ const KeyFeatures = () => {
   return (
     <section className="py-20 bg-gradient-to-b from-church-cream to-white">
       <div className="container mx-auto px-6 lg:px-12">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -192,7 +188,6 @@ const KeyFeatures = () => {
           </p>
         </motion.div>
 
-        {/* Features Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -200,7 +195,7 @@ const KeyFeatures = () => {
           viewport={{ once: true }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
         >
-          {features.map((feature, index) => (
+          {features.map((feature) => (
             <motion.div
               key={feature.headline}
               variants={itemVariants}
@@ -211,22 +206,18 @@ const KeyFeatures = () => {
             >
               <Card className="church-card h-full group hover:shadow-divine transition-all duration-300 border border-white bg-white/50 backdrop-blur-sm">
                 <CardContent className="p-6 text-center">
-                  {/* Icon Container */}
                   <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-church-gold to-secondary-light flex items-center justify-center text-white shadow-golden group-hover:scale-110 transition-transform duration-300">
                     <feature.icon className="w-8 h-8" />
                   </div>
 
-                  {/* Badge */}
                   <div className="inline-block bg-church-light-blue/30 text-church-navy px-3 py-1 rounded-full text-xs font-semibold mb-3">
                     {feature.badge}
                   </div>
 
-                  {/* Headline */}
                   <h3 className="text-lg font-bold text-church-navy mb-3 leading-tight">
                     {feature.headline}
                   </h3>
 
-                  {/* Description */}
                   <p className="text-muted-foreground text-sm leading-relaxed">
                     {feature.description}
                   </p>
@@ -236,7 +227,6 @@ const KeyFeatures = () => {
           ))}
         </motion.div>
 
-        {/* Updated Trust Indicators with Background Images */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -244,7 +234,6 @@ const KeyFeatures = () => {
           viewport={{ once: true }}
           className="text-center"
         >
-          {/* Section Header */}
           <div className="mb-12">
             <h3 className="text-3xl md:text-4xl font-bold text-church-navy mb-4">
               Our Track Record of Excellence
@@ -254,7 +243,6 @@ const KeyFeatures = () => {
             </p>
           </div>
 
-          {/* Stats Grid with Background Images */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -275,18 +263,14 @@ const KeyFeatures = () => {
               >
                 <Card className="church-card border-0 bg-transparent shadow-none overflow-hidden h-full">
                   <CardContent className="p-0 relative rounded-2xl overflow-hidden h-full min-h-[280px]">
-                    {/* Background Image with Overlay */}
                     <div 
                       className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                       style={{ backgroundImage: `url(${stat.image})` }}
                     />
                     
-                  {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-black bg-opacity-40 transition-all duration-500 group-hover:bg-opacity-30" />
                     
-                    {/* Content Container */}
                     <div className="relative z-10 p-6 h-full flex flex-col justify-center items-center text-white">
-                      {/* Icon with Gradient Background */}
                       <motion.div
                         whileHover={{ 
                           scale: 1.1,
@@ -298,7 +282,6 @@ const KeyFeatures = () => {
                         <stat.icon className="w-8 h-8" />
                       </motion.div>
 
-                      {/* Main Number */}
                       <motion.div
                         initial={{ scale: 0.5 }}
                         whileInView={{ scale: 1 }}
@@ -314,18 +297,15 @@ const KeyFeatures = () => {
                         {stat.number}
                       </motion.div>
 
-                      {/* Label */}
                       <h4 className="text-lg font-semibold mb-2 text-church-gold drop-shadow-lg text-center">
                         {stat.label}
                       </h4>
 
-                      {/* Description */}
                       <p className="text-white/90 text-sm leading-relaxed text-center drop-shadow-lg max-w-[200px]">
                         {stat.description}
                       </p>
                     </div>
 
-                    {/* Hover Effect Overlay */}
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 z-20" />
                   </CardContent>
                 </Card>
@@ -333,7 +313,6 @@ const KeyFeatures = () => {
             ))}
           </motion.div>
 
-          {/* Additional Trust Badges */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

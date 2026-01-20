@@ -1,4 +1,4 @@
-import { Calendar, Clock, Video, MapPin, Users } from 'lucide-react';
+import { Calendar, Clock, Video, Users } from 'lucide-react';
 
 export default function ConsultationOverview() {
   const upcomingSession = {
@@ -22,7 +22,6 @@ export default function ConsultationOverview() {
         </div>
       </div>
 
-      {/* Session Details */}
       <div className="space-y-4">
         <div className="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
           <Calendar className="w-5 h-5 text-blue-600" />
@@ -49,7 +48,6 @@ export default function ConsultationOverview() {
         </div>
       </div>
 
-      {/* Preparation Checklist */}
       <div className="mt-6">
         <h4 className="font-semibold text-foreground mb-3 flex items-center">
           <Users className="w-4 h-4 mr-2" />
@@ -67,7 +65,6 @@ export default function ConsultationOverview() {
         </div>
       </div>
 
-      {/* Action Buttons */}
       <div className="mt-6 grid grid-cols-2 gap-3">
         <button className="church-button-outline py-2 text-sm">
           Reschedule

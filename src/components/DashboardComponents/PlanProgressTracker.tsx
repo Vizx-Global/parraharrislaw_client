@@ -1,4 +1,4 @@
-import { CheckCircle, Clock, AlertCircle, FileText, Calendar, Users, MessageSquare } from 'lucide-react';
+import { CheckCircle, Clock, AlertCircle, FileText, Users, MessageSquare } from 'lucide-react';
 
 const milestones = [
   {
@@ -96,7 +96,6 @@ export default function PlanProgressTracker() {
         </div>
       </div>
 
-      {/* Progress Bar */}
       <div className="mb-8">
         <div className="flex justify-between text-sm text-muted-foreground mb-2">
           <span>Milestone Progress</span>
@@ -110,7 +109,6 @@ export default function PlanProgressTracker() {
         </div>
       </div>
 
-      {/* Enhanced Milestones */}
       <div className="space-y-6">
         {milestones.map((milestone, index) => {
           const config = statusConfig[milestone.status as keyof typeof statusConfig];
@@ -118,12 +116,10 @@ export default function PlanProgressTracker() {
           
           return (
             <div key={milestone.id} className="flex items-start space-x-4 p-4 rounded-lg border border-border hover:border-church-gold/30 transition-colors">
-              {/* Status Indicator */}
               <div className={`w-14 h-14 rounded-full flex items-center justify-center border-2 ${config.border} ${config.bg} flex-shrink-0`}>
                 <Icon className={config.color} size={24} />
               </div>
               
-              {/* Content */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between mb-2">
                   <div>

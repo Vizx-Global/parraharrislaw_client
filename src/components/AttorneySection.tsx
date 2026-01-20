@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Award, Languages, Star, Calendar } from "lucide-react";
+import { ArrowRight, Award, Calendar } from "lucide-react";
 import PaolaImage from "@/assets/PaolaParra.png";
 import LynnImage from "@/assets/Lynn.png";
 import JohnImage from "@/assets/John.png";
@@ -66,7 +66,6 @@ const AttorneysSection = () => {
   return (
     <section className="py-10 bg-white">
       <div className="container mx-auto px-6 lg:px-12">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -82,7 +81,6 @@ const AttorneysSection = () => {
           </p>
         </motion.div>
 
-        {/* Featured Attorney - Paola Parra Harris */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -91,7 +89,6 @@ const AttorneysSection = () => {
           className="mb-20"
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Content */}
             <div className="order-2 lg:order-1">
               <div className="flex items-center mb-4">
                 <Award className="w-6 h-6 text-church-gold mr-2" />
@@ -106,7 +103,6 @@ const AttorneysSection = () => {
                 {attorneys.featured.bio}
               </p>
 
-              {/* Specialties */}
               <div className="mb-8">
                 <h4 className="text-lg font-semibold text-church-navy mb-3">Community Involvement & Leadership</h4>
                 <div className="flex flex-wrap gap-2">
@@ -121,7 +117,6 @@ const AttorneysSection = () => {
                 </div>
               </div>
 
-              {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button className="church-button">
                   Learn More About Paola
@@ -134,7 +129,6 @@ const AttorneysSection = () => {
               </div>
             </div>
 
-            {/* Image */}
             <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
               <motion.div
                 whileHover={{ scale: 1.02 }}
@@ -147,7 +141,6 @@ const AttorneysSection = () => {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                {/* Decorative Element */}
                 <div className="absolute -top-4 -right-4 w-24 h-24 bg-church-gold rounded-full opacity-20 animate-pulse"></div>
                 <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-church-light-blue rounded-full opacity-30"></div>
               </motion.div>
@@ -155,7 +148,6 @@ const AttorneysSection = () => {
           </div>
         </motion.div>
 
-        {/* Team Attorneys */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -172,14 +164,13 @@ const AttorneysSection = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {attorneys.team.map((attorney, index) => (
+            {attorneys.team.map((attorney) => (
               <motion.div
                 key={attorney.name}
                 variants={itemVariants}
                 whileHover="hover"
                 className="feature-card text-center group"
               >
-                {/* Attorney Image */}
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-6 border-4 border-white shadow-soft group-hover:shadow-golden transition-all duration-300"
@@ -191,7 +182,6 @@ const AttorneysSection = () => {
                   />
                 </motion.div>
 
-                {/* Attorney Info */}
                 <div className="mb-4">
                   <h4 className="text-xl font-bold text-church-navy mb-1">
                     {attorney.name}
@@ -204,7 +194,6 @@ const AttorneysSection = () => {
                   </p>
                 </div>
 
-                {/* View Portfolio Link */}
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -222,7 +211,6 @@ const AttorneysSection = () => {
           </div>
         </motion.div>
 
-        {/* Bottom CTA */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
