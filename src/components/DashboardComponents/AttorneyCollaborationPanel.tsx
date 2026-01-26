@@ -1,7 +1,9 @@
 import { MessageSquare, Phone, Calendar, FileText, Award, Clock } from 'lucide-react';
 import CompanyLogo from '@/assets/PARRA HARRIS Logo.png';
+import { useNavigate } from 'react-router-dom';
 
 export default function AttorneyCollaborationPanel() {
+  const navigate = useNavigate();
   const attorney = {
     name: 'Parra Harris, Esq.',
     specialty: 'Family Law Specialist',
@@ -73,19 +75,28 @@ export default function AttorneyCollaborationPanel() {
 
         <div className="lg:col-span-2">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <button className="flex flex-col items-center p-4 border-2 border-church-gold rounded-xl bg-orange-50 hover:bg-orange-100 transition-colors group">
+            <button 
+              onClick={() => navigate('/dashboard/messages')}
+              className="flex flex-col items-center p-4 border-2 border-church-gold rounded-xl bg-orange-50 hover:bg-orange-100 transition-colors group"
+            >
               <MessageSquare className="w-8 h-8 text-church-gold mb-2 group-hover:scale-110 transition-transform" />
               <span className="font-semibold text-foreground">Send Message</span>
               <span className="text-xs text-muted-foreground mt-1">Secure chat</span>
             </button>
             
-            <button className="flex flex-col items-center p-4 border-2 border-border rounded-xl hover:border-church-gold/30 hover:bg-orange-50 transition-colors group">
+            <button 
+              onClick={() => navigate('/dashboard/consultation')}
+              className="flex flex-col items-center p-4 border-2 border-border rounded-xl hover:border-church-gold/30 hover:bg-orange-50 transition-colors group"
+            >
               <Phone className="w-8 h-8 text-church-navy mb-2 group-hover:scale-110 transition-transform" />
               <span className="font-semibold text-foreground">Request Call</span>
               <span className="text-xs text-muted-foreground mt-1">15-min callback</span>
             </button>
             
-            <button className="flex flex-col items-center p-4 border-2 border-border rounded-xl hover:border-church-gold/30 hover:bg-orange-50 transition-colors group">
+            <button 
+              onClick={() => navigate('/dashboard/consultation')}
+              className="flex flex-col items-center p-4 border-2 border-border rounded-xl hover:border-church-gold/30 hover:bg-orange-50 transition-colors group"
+            >
               <Calendar className="w-8 h-8 text-church-navy mb-2 group-hover:scale-110 transition-transform" />
               <span className="font-semibold text-foreground">Schedule Meeting</span>
               <span className="text-xs text-muted-foreground mt-1">Video conference</span>

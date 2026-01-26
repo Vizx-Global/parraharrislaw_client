@@ -1,4 +1,5 @@
 import { MessageSquare, FileText, UserCheck, CheckCircle, AlertCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const activities = [
   {
@@ -54,6 +55,8 @@ const activities = [
 ];
 
 export default function RecentActivityTimeline() {
+  const navigate = useNavigate();
+
   return (
     <div className="church-card">
       <div className="flex items-center justify-between mb-6">
@@ -61,7 +64,10 @@ export default function RecentActivityTimeline() {
           <h2 className="text-xl font-semibold text-foreground">Recent Activity</h2>
           <p className="text-muted-foreground">Latest updates on your case</p>
         </div>
-        <button className="text-sm text-church-navy hover:text-church-gold transition-colors">
+        <button 
+          onClick={() => navigate('/dashboard/support')}
+          className="text-sm text-church-navy hover:text-church-gold transition-colors"
+        >
           View All
         </button>
       </div>
@@ -91,12 +97,18 @@ export default function RecentActivityTimeline() {
                 {(activity.type === 'message' || activity.type === 'document') && (
                   <div className="mt-2 flex space-x-2">
                     {activity.type === 'message' && (
-                      <button className="text-xs text-blue-600 hover:text-blue-700 font-medium">
+                      <button 
+                        onClick={() => navigate('/dashboard/messages')}
+                        className="text-xs text-blue-600 hover:text-blue-700 font-medium"
+                      >
                         Reply
                       </button>
                     )}
                     {activity.type === 'document' && (
-                      <button className="text-xs text-green-600 hover:text-green-700 font-medium">
+                      <button 
+                        onClick={() => navigate('/dashboard/parenting-plan/questionnaire')}
+                        className="text-xs text-green-600 hover:text-green-700 font-medium"
+                      >
                         Review Changes
                       </button>
                     )}
@@ -110,15 +122,15 @@ export default function RecentActivityTimeline() {
 
       <div className="mt-6 pt-4 border-t border-border">
         <div className="grid grid-cols-3 gap-4 text-center">
-          <div>
+          <div className="cursor-pointer hover:bg-muted/50 p-2 rounded-lg transition-colors" onClick={() => navigate('/dashboard/messages')}>
             <div className="text-lg font-bold text-church-navy">12</div>
             <div className="text-xs text-muted-foreground">Messages</div>
           </div>
-          <div>
+          <div className="cursor-pointer hover:bg-muted/50 p-2 rounded-lg transition-colors" onClick={() => navigate('/dashboard/documents')}>
             <div className="text-lg font-bold text-church-navy">8</div>
             <div className="text-xs text-muted-foreground">Documents</div>
           </div>
-          <div>
+          <div className="cursor-pointer hover:bg-muted/50 p-2 rounded-lg transition-colors" onClick={() => navigate('/dashboard/support')}>
             <div className="text-lg font-bold text-church-navy">3</div>
             <div className="text-xs text-muted-foreground">Updates</div>
           </div>

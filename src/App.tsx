@@ -18,6 +18,12 @@ import HowWeWork from "./pages/HowWeWork";
 import Pricing from "./pages/Pricing";
 import AdvancedPlanQuestionnaire from '@/pages/Questionnaires/AdvancedPlan/AdvancedCoParentingQuestionnaire';
 import DIYToAdvance from '@/pages/Questionnaires/AdvancedPlan/DIYToAdvance';
+import AttorneyMessages from "./pages/Dashboard/AttorneyMessages";
+import Documents from "./pages/Dashboard/Documents";
+import FinancialInfo from "./pages/Dashboard/FinancialInfo";
+import Consultation from "./pages/Dashboard/Consultation";
+import Billing from "./pages/Dashboard/Billing";
+import Support from "./pages/Dashboard/Support";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +53,12 @@ const App = () => (
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/advance-plan-dashboard" element={<AdvancedPlanDashboard />} />
           <Route path="/dashboard/parenting-plan/questionnaire" element={<AdvancedPlanQuestionnaire onComplete={handleQuestionnaireComplete} onSaveDraft={handleAutoSave} />} />
+          <Route path="/dashboard/messages" element={<AttorneyMessages />} />
+          <Route path="/dashboard/documents" element={<Documents />} />
+          <Route path="/dashboard/financial" element={<FinancialInfo />} />
+          <Route path="/dashboard/consultation" element={<Consultation />} />
+          <Route path="/dashboard/billing" element={<Billing />} />
+          <Route path="/dashboard/support" element={<Support />} />
           <Route path="/advance-plan" element={<DIYToAdvance />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

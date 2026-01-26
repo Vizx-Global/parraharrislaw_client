@@ -128,6 +128,8 @@ export default function AdvancedPlanQuestionnaire({ onComplete, onSaveDraft }) {
   };
 
   const nextSection = () => {
+    // Validation is disabled to allow proceeding with null fields for presentation purposes.
+    /*
     const errors = validateSection(currentSection);
     
     if (Object.keys(errors).length > 0) {
@@ -141,6 +143,7 @@ export default function AdvancedPlanQuestionnaire({ onComplete, onSaveDraft }) {
       }
       return;
     }
+    */
     
     setValidationErrors({});
     setShowErrors(false);

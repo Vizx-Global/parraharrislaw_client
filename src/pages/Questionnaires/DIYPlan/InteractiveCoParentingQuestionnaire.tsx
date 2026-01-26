@@ -93,6 +93,8 @@ export default function InteractiveCoParentingQuestionnaire() {
   };
 
   const nextSection = () => {
+    // Validation is disabled for presentation purposes.
+    /*
     const errors = validateSection(currentSection);
 
     if (Object.keys(errors).length > 0) {
@@ -106,6 +108,7 @@ export default function InteractiveCoParentingQuestionnaire() {
       }
       return;
     }
+    */
 
     setValidationErrors({});
     setShowErrors(false);

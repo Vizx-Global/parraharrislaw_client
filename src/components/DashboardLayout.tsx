@@ -26,6 +26,7 @@ export default function DashboardLayout({ children, user }: DashboardLayoutProps
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
         isCollapsed={sidebarCollapsed}
+        onToggle={toggleSidebar}
       />
 
       {/* Main Content */}

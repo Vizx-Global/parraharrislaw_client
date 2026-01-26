@@ -1,5 +1,6 @@
 // components/dashboard/TopBar.tsx
 import { Bell, Menu, Search, User, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface TopBarProps {
   user: {
@@ -12,6 +13,7 @@ interface TopBarProps {
 }
 
 export default function TopBar({ user, onMenuClick, onToggleSidebar, sidebarCollapsed }: TopBarProps) {
+  const navigate = useNavigate();
   const progress = 35; // Example progress
   
   return (
@@ -54,7 +56,10 @@ export default function TopBar({ user, onMenuClick, onToggleSidebar, sidebarColl
           </div>
 
           {/* Notifications */}
-          <button className="relative p-2 hover:bg-muted rounded-lg transition-colors">
+          <button 
+            onClick={() => navigate('/dashboard/support')}
+            className="relative p-2 hover:bg-muted rounded-lg transition-colors"
+          >
             <Bell size={20} className="text-muted-foreground" />
             <span className="absolute top-1 right-1 w-2 h-2 bg-church-gold rounded-full" />
           </button>

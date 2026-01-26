@@ -1,4 +1,5 @@
 import { Upload, MessageSquare, Calendar, FileText, Download, Settings } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const quickActions = [
   {
@@ -8,7 +9,8 @@ const quickActions = [
     status: '3 of 5 documents pending',
     buttonText: 'Upload Now',
     variant: 'primary' as const,
-    progress: 40
+    progress: 40,
+    href: '/dashboard/financial'
   },
   {
     icon: MessageSquare,
@@ -17,7 +19,8 @@ const quickActions = [
     status: '2 unread messages',
     buttonText: 'Open Messages',
     variant: 'outline' as const,
-    progress: 100
+    progress: 100,
+    href: '/dashboard/messages'
   },
   {
     icon: Calendar,
@@ -26,7 +29,8 @@ const quickActions = [
     status: '1 session included',
     buttonText: 'View Availability',
     variant: 'outline' as const,
-    progress: 0
+    progress: 0,
+    href: '/dashboard/consultation'
   },
   {
     icon: FileText,
@@ -35,7 +39,8 @@ const quickActions = [
     status: 'Last updated today',
     buttonText: 'View Draft',
     variant: 'outline' as const,
-    progress: 75
+    progress: 75,
+    href: '/dashboard/parenting-plan/questionnaire'
   },
   {
     icon: Download,
@@ -44,7 +49,8 @@ const quickActions = [
     status: '12 resources available',
     buttonText: 'Browse Library',
     variant: 'outline' as const,
-    progress: 100
+    progress: 100,
+    href: '/dashboard/documents'
   },
   {
     icon: Settings,
@@ -53,11 +59,14 @@ const quickActions = [
     status: 'All settings active',
     buttonText: 'Configure',
     variant: 'outline' as const,
-    progress: 100
+    progress: 100,
+    href: '/dashboard/support'
   }
 ];
 
 export default function ActionCardsGrid() {
+  const navigate = useNavigate();
+
   return (
     <div className="church-card">
       <div className="mb-6">
@@ -108,11 +117,14 @@ export default function ActionCardsGrid() {
                 </div>
               )}
               
-              <button className={`w-full py-2.5 px-4 rounded-lg font-semibold text-sm transition-all duration-300 ${
-                isPrimary
-                  ? 'church-button'
-                  : 'church-button-outline'
-              }`}>
+              <button 
+                onClick={() => navigate(action.href)}
+                className={`w-full py-2.5 px-4 rounded-lg font-semibold text-sm transition-all duration-300 ${
+                  isPrimary
+                    ? 'church-button'
+                    : 'church-button-outline'
+                }`}
+              >
                 {action.buttonText}
               </button>
             </div>
